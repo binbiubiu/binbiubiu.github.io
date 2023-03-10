@@ -16,18 +16,31 @@
   <meta name="author" content="Binbiubiu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1. Redis数据结构介绍![Redis数据结构](Redis基础篇 - 数据结构与常用命令&#x2F;image-20221205143031769.png) 2. 操作命令 操作命令官方文档。  在客户端命令行窗口输入：  help 命令名称，如：help del就是查看 del 命令的使用文档。 ![help命令示例](Redis基础篇 - 数据结构与常用命令&#x2F;image-202">
+    <meta name="description" content="1. Redis数据结构介绍 2. 操作命令 操作命令官方文档。  在客户端命令行窗口输入：  help 命令名称，如：help del就是查看 del 命令的使用文档。   help @groupName，查看某个命令分组下的命令文档，如：help @list就是查看 list 命令相关的文档。命令分组在官方在线文档中有说明。     2.1. 通用命令123456789101112131415">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Redis基础篇 - 数据结构与常用命令">
 <meta property="og:url" content="https://binbiubiu.github.io/20221205120000/index.html">
 <meta property="og:site_name" content="Binbiubiu&#39;s blog">
-<meta property="og:description" content="1. Redis数据结构介绍![Redis数据结构](Redis基础篇 - 数据结构与常用命令&#x2F;image-20221205143031769.png) 2. 操作命令 操作命令官方文档。  在客户端命令行窗口输入：  help 命令名称，如：help del就是查看 del 命令的使用文档。 ![help命令示例](Redis基础篇 - 数据结构与常用命令&#x2F;image-202">
+<meta property="og:description" content="1. Redis数据结构介绍 2. 操作命令 操作命令官方文档。  在客户端命令行窗口输入：  help 命令名称，如：help del就是查看 del 命令的使用文档。   help @groupName，查看某个命令分组下的命令文档，如：help @list就是查看 list 命令相关的文档。命令分组在官方在线文档中有说明。     2.1. 通用命令123456789101112131415">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://binbiubiu.github.io/20221205120000/image-20221205143031769.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20221205120000/image-20221205145103409.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20221205120000/image-20221205161637493.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20221205120000/image-20221205163300077.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20221205120000/image-20221205163912138.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20221205120000/image-20221205163949163.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20221205120000/image-20221205165838811.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20221205120000/image-20221205170314931.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20221205120000/image-20221205170949113.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20221205120000/image-20221205171515423.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20221205120000/image-20221205171956067.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20221205120000/image-20221205172144278.png">
 <meta property="article:published_time" content="2022-12-05T04:00:00.000Z">
-<meta property="article:modified_time" content="2023-03-08T03:04:15.861Z">
+<meta property="article:modified_time" content="2023-03-09T17:15:07.036Z">
 <meta property="article:author" content="Binbiubiu">
 <meta property="article:tag" content="Redis">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://binbiubiu.github.io/20221205120000/image-20221205143031769.png">
   
   
   
@@ -220,7 +233,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.4k 字
+          570 字
         
       </span>
     
@@ -231,7 +244,7 @@
         
         
         
-          12 分钟
+          5 分钟
         
       </span>
     
@@ -274,14 +287,14 @@
             
               <div class="markdown-body">
                 
-                <h1 id="1-Redis数据结构介绍"><a href="#1-Redis数据结构介绍" class="headerlink" title="1. Redis数据结构介绍"></a>1. Redis数据结构介绍</h1><p>![Redis数据结构](Redis基础篇 - 数据结构与常用命令&#x2F;image-20221205143031769.png)</p>
+                <h1 id="1-Redis数据结构介绍"><a href="#1-Redis数据结构介绍" class="headerlink" title="1. Redis数据结构介绍"></a>1. Redis数据结构介绍</h1><p><img src="/20221205120000/image-20221205143031769.png" srcset="/img/loading.gif" lazyload alt="Redis数据结构"></p>
 <h1 id="2-操作命令"><a href="#2-操作命令" class="headerlink" title="2. 操作命令"></a>2. 操作命令</h1><ul>
 <li><p><a target="_blank" rel="noopener" href="https://redis.io/commands/">操作命令官方文档</a>。</p>
 </li>
 <li><p>在客户端命令行窗口输入：</p>
 <ul>
 <li><p><code>help 命令名称</code>，如：<code>help del</code>就是查看 <code>del</code> 命令的使用文档。</p>
-<p>![help命令示例](Redis基础篇 - 数据结构与常用命令&#x2F;image-20221205145103409.png)</p>
+<p><img src="/20221205120000/image-20221205145103409.png" srcset="/img/loading.gif" lazyload alt="help命令示例"></p>
 </li>
 <li><p><code>help @groupName</code>，查看某个命令分组下的命令文档，如：<code>help @list</code>就是查看 <code>list</code> 命令相关的文档。命令分组在官方在线文档中有说明。</p>
 </li>
@@ -292,22 +305,22 @@
 
 
 
-<h2 id="2-2-String类型"><a href="#2-2-String类型" class="headerlink" title="2.2. String类型"></a>2.2. String类型</h2><h3 id="String类型常见命令"><a href="#String类型常见命令" class="headerlink" title="String类型常见命令"></a>String类型常见命令</h3><p>![String类型常用命令](Redis基础篇 - 数据结构与常用命令&#x2F;image-20221205161637493.png)</p>
-<h3 id="有层级结构的key"><a href="#有层级结构的key" class="headerlink" title="有层级结构的key"></a>有层级结构的key</h3><p>![key层级结构](Redis基础篇 - 数据结构与常用命令&#x2F;image-20221205163300077.png)</p>
-<h2 id="2-3-Hash类型"><a href="#2-3-Hash类型" class="headerlink" title="2.3. Hash类型"></a>2.3. Hash类型</h2><p>![Hash类型](Redis基础篇 - 数据结构与常用命令&#x2F;image-20221205163912138.png)</p>
-<h3 id="Hash类型常见命令"><a href="#Hash类型常见命令" class="headerlink" title="Hash类型常见命令"></a>Hash类型常见命令</h3><p>![Hash类型常见命令](Redis基础篇 - 数据结构与常用命令&#x2F;image-20221205163949163.png)</p>
-<h2 id="2-4-List类型"><a href="#2-4-List类型" class="headerlink" title="2.4. List类型"></a>2.4. List类型</h2><h3 id="List类型常用命令"><a href="#List类型常用命令" class="headerlink" title="List类型常用命令"></a>List类型常用命令</h3><p>![List类型常用命令](Redis基础篇 - 数据结构与常用命令&#x2F;image-20221205165838811.png)</p>
-<h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><p>![应用思考](Redis基础篇 - 数据结构与常用命令&#x2F;image-20221205170314931.png)</p>
+<h2 id="2-2-String类型"><a href="#2-2-String类型" class="headerlink" title="2.2. String类型"></a>2.2. String类型</h2><h3 id="String类型常见命令"><a href="#String类型常见命令" class="headerlink" title="String类型常见命令"></a>String类型常见命令</h3><p><img src="/20221205120000/image-20221205161637493.png" srcset="/img/loading.gif" lazyload alt="String类型常用命令"></p>
+<h3 id="有层级结构的key"><a href="#有层级结构的key" class="headerlink" title="有层级结构的key"></a>有层级结构的key</h3><p><img src="/20221205120000/image-20221205163300077.png" srcset="/img/loading.gif" lazyload alt="key层级结构"></p>
+<h2 id="2-3-Hash类型"><a href="#2-3-Hash类型" class="headerlink" title="2.3. Hash类型"></a>2.3. Hash类型</h2><p><img src="/20221205120000/image-20221205163912138.png" srcset="/img/loading.gif" lazyload alt="Hash类型"></p>
+<h3 id="Hash类型常见命令"><a href="#Hash类型常见命令" class="headerlink" title="Hash类型常见命令"></a>Hash类型常见命令</h3><p><img src="/20221205120000/image-20221205163949163.png" srcset="/img/loading.gif" lazyload alt="Hash类型常见命令"></p>
+<h2 id="2-4-List类型"><a href="#2-4-List类型" class="headerlink" title="2.4. List类型"></a>2.4. List类型</h2><h3 id="List类型常用命令"><a href="#List类型常用命令" class="headerlink" title="List类型常用命令"></a>List类型常用命令</h3><p><img src="/20221205120000/image-20221205165838811.png" srcset="/img/loading.gif" lazyload alt="List类型常用命令"></p>
+<h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><p><img src="/20221205120000/image-20221205170314931.png" srcset="/img/loading.gif" lazyload alt="应用思考"></p>
 <blockquote>
 <p>说明：</p>
 <p>栈的特点：只有一个进出口，先进后出，所以可以利用list的特性，比如：<code>lpush</code>和<code>lpop</code>即可。</p>
 <p>队列：先进的可以先出，不同进出口，比如：<code>lpush</code>和<code>rpop</code>。</p>
 <p>阻塞队列：<code>blpop</code>或者<code>brpop</code>是在有数据的情况就取出，没有数据就等待。</p>
 </blockquote>
-<h2 id="2-5-Set类型"><a href="#2-5-Set类型" class="headerlink" title="2.5. Set类型"></a>2.5. Set类型</h2><h3 id="Set类型介绍"><a href="#Set类型介绍" class="headerlink" title="Set类型介绍"></a>Set类型介绍</h3><p>![Set类型介绍](Redis基础篇 - 数据结构与常用命令&#x2F;image-20221205170949113.png)</p>
-<h3 id="Set类型常见命令"><a href="#Set类型常见命令" class="headerlink" title="Set类型常见命令"></a>Set类型常见命令</h3><p>![Set类型常见命令](Redis基础篇 - 数据结构与常用命令&#x2F;image-20221205171515423.png)</p>
-<h2 id="2-6-SortedSet"><a href="#2-6-SortedSet" class="headerlink" title="2.6 SortedSet"></a>2.6 SortedSet</h2><h3 id="SortedSet类型"><a href="#SortedSet类型" class="headerlink" title="SortedSet类型"></a>SortedSet类型</h3><p>![SortedSet类型介绍](Redis基础篇 - 数据结构与常用命令&#x2F;image-20221205171956067.png)</p>
-<h3 id="SortedSet类型常见命令"><a href="#SortedSet类型常见命令" class="headerlink" title="SortedSet类型常见命令"></a>SortedSet类型常见命令</h3><p>![SortedSet类型常见命令](Redis基础篇 - 数据结构与常用命令&#x2F;image-20221205172144278.png)</p>
+<h2 id="2-5-Set类型"><a href="#2-5-Set类型" class="headerlink" title="2.5. Set类型"></a>2.5. Set类型</h2><h3 id="Set类型介绍"><a href="#Set类型介绍" class="headerlink" title="Set类型介绍"></a>Set类型介绍</h3><p><img src="/20221205120000/image-20221205170949113.png" srcset="/img/loading.gif" lazyload alt="Set类型介绍"></p>
+<h3 id="Set类型常见命令"><a href="#Set类型常见命令" class="headerlink" title="Set类型常见命令"></a>Set类型常见命令</h3><p><img src="/20221205120000/image-20221205171515423.png" srcset="/img/loading.gif" lazyload alt="Set类型常见命令"></p>
+<h2 id="2-6-SortedSet"><a href="#2-6-SortedSet" class="headerlink" title="2.6 SortedSet"></a>2.6 SortedSet</h2><h3 id="SortedSet类型"><a href="#SortedSet类型" class="headerlink" title="SortedSet类型"></a>SortedSet类型</h3><p><img src="/20221205120000/image-20221205171956067.png" srcset="/img/loading.gif" lazyload alt="SortedSet类型介绍"></p>
+<h3 id="SortedSet类型常见命令"><a href="#SortedSet类型常见命令" class="headerlink" title="SortedSet类型常见命令"></a>SortedSet类型常见命令</h3><p><img src="/20221205120000/image-20221205172144278.png" srcset="/img/loading.gif" lazyload alt="SortedSet类型常见命令"></p>
 
                 
               </div>
@@ -378,22 +391,6 @@
       
       
       
-        <div class="license-meta-item">
-          <div>许可协议</div>
-          <div>
-            
-              
-              
-                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
-                    <i class="iconfont icon-by"></i>
-                  </span>
-                </a>
-              
-            
-          </div>
-        </div>
-      
     </div>
     <div class="license-icon iconfont"></div>
   </div>
@@ -405,18 +402,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/20221205130000/" title="Redis集群搭建">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Redis集群搭建</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/20221205000000/" title="Redis实战篇 - 黑马点评项目">
-                        <span class="hidden-mobile">Redis实战篇 - 黑马点评项目</span>
+                      <a href="/20221103140000/" title="Springboot中使用redis的乱码问题">
+                        <span class="hidden-mobile">Springboot中使用redis的乱码问题</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

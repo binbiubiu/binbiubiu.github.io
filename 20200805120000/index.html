@@ -1,0 +1,780 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/blogger-logo.png">
+  <link rel="icon" href="/img/blogger-logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Binbiubiu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="本文主要介绍git的使用入门，包括安装、配置、常用命令。  1. 安装本文以 Linux环境安装为例，windows系统大同小异。 12345# linux安装gityum install git# 通过查看安装版本信息看是否安装成功git --version    2. 基本配置 基本配置（命令行方式配置） 1234567891011121314# 配置用户信息：（提交时的用户信息）# 不建议">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git使用手册">
+<meta property="og:url" content="https://binbiubiu.github.io/20200805120000/index.html">
+<meta property="og:site_name" content="Binbiubiu&#39;s blog">
+<meta property="og:description" content="本文主要介绍git的使用入门，包括安装、配置、常用命令。  1. 安装本文以 Linux环境安装为例，windows系统大同小异。 12345# linux安装gityum install git# 通过查看安装版本信息看是否安装成功git --version    2. 基本配置 基本配置（命令行方式配置） 1234567891011121314# 配置用户信息：（提交时的用户信息）# 不建议">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://binbiubiu.github.io/20200805120000/image-20230308234558076.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20200805120000/image-20230308234619650.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20200805120000/image-20230309000444555.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20200805120000/image-20230309000842601.png">
+<meta property="article:published_time" content="2020-08-05T04:00:00.000Z">
+<meta property="article:modified_time" content="2023-03-08T16:09:47.970Z">
+<meta property="article:author" content="Binbiubiu">
+<meta property="article:tag" content="Git">
+<meta property="article:tag" content="Git命令">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://binbiubiu.github.io/20200805120000/image-20230308234558076.png">
+  
+  
+  
+  <title>Git使用手册 - Binbiubiu&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"binbiubiu.github.io","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>BinBiuBiu&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Git使用手册"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2020-08-05 12:00" pubdate>
+          2020年8月5日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          24 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Git使用手册</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <blockquote>
+<p>本文主要介绍git的使用入门，包括安装、配置、常用命令。</p>
+</blockquote>
+<h1 id="1-安装"><a href="#1-安装" class="headerlink" title="1. 安装"></a>1. 安装</h1><p>本文以 Linux环境安装为例，windows系统大同小异。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">linux安装git</span><br>yum install git<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">通过查看安装版本信息看是否安装成功</span><br>git --version<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="2-基本配置"><a href="#2-基本配置" class="headerlink" title="2. 基本配置"></a>2. 基本配置</h1><ol>
+<li><p>基本配置（命令行方式配置）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">配置用户信息：（提交时的用户信息）</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">不建议设置 global 的用户属性，建议只在某一本地仓库进行设置</span><br>git config --global user.name &quot;test&quot;<br>git config --global user.email &quot;test@abc.com&quot;<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">配置提交信息编码(值不能有引号,如果有的话在idea里面会报错)</span><br>git config --global gui.encoding utf-8<br>git config --global i18n.commitencoding utf-8<br>git config --global i18n.logoutputencoding utf-8<br>git config --global svn.pathnameencoding utf-8<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">查看配置信息</span><br>git config --global --list<br>git config --list<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>授权配置</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">生成授信证书</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">第一次回车，会让输入生成的文件名，为空就是默认。</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">第二次回车，会让输入生成的密码，为空就是默认。</span><br>ssh-keygen -t rsa -C test@abc.com<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">到证书目录查看生成的证书。<span class="hljs-built_in">ls</span> 即可查看到生成的文件。id_rsa 和 id_rsa.pub，.pub文件是公钥，另一个是私钥。</span><br>cd ~/.ssh/<br><span class="hljs-meta prompt_"># </span><span class="language-bash">查看公钥内容并复制</span><br>cat id_rsa.pub<br></code></pre></td></tr></table></figure>
+
+<p>然后将git证书配置到代码托管平台（如：github或者gitlab），使得Linux服务器与github之间可以连通。</p>
+<ul>
+<li><p>配置github</p>
+<ol>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/">登陆github</a>。</p>
+</li>
+<li><p>点击用户头像 &gt; settings &gt; SSH and GPG keys &gt; 选择 New SSH key。title 自定义，key 为 id_rsa.pub 中的内容，然后单击add。</p>
+</li>
+<li><p>测试连接，回到Linux服务器，命令行输入：ssh -T <a href="mailto:&#103;&#105;&#x74;&#64;&#103;&#105;&#116;&#104;&#117;&#x62;&#46;&#x63;&#x6f;&#109;">&#103;&#105;&#x74;&#64;&#103;&#105;&#116;&#104;&#117;&#x62;&#46;&#x63;&#x6f;&#109;</a></p>
+<p>连接成功后会提示 Hi xxx! You’ve successfully authenticated…</p>
+</li>
+</ol>
+</li>
+<li><p>配置gitlab</p>
+<ol>
+<li><p>进入gitlab平台。</p>
+<p><img src="/20200805120000/image-20230308234558076.png" srcset="/img/loading.gif" lazyload alt="image-20230308234558076"></p>
+<p><img src="/20200805120000/image-20230308234619650.png" srcset="/img/loading.gif" lazyload alt="image-20230308234619650"></p>
+</li>
+<li><p>连接测试：ssh -T <a href="mailto:&#x67;&#x69;&#x74;&#x40;&#x67;&#x69;&#x74;&#x6c;&#x61;&#x62;&#x2e;&#x63;&#x6f;&#x6d;">&#x67;&#x69;&#x74;&#x40;&#x67;&#x69;&#x74;&#x6c;&#x61;&#x62;&#x2e;&#x63;&#x6f;&#x6d;</a></p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="3-两种Git连接方式"><a href="#3-两种Git连接方式" class="headerlink" title="3. 两种Git连接方式"></a>3. 两种Git连接方式</h1><ol>
+<li><p>SSH链接和HTTPS链接。</p>
+</li>
+<li><p>SSH链接和HTTPS链接的不同：</p>
+<ul>
+<li><p>通过SSH连接获取代码、提交代码的时候不需要输入密码，需要事先配置公钥。</p>
+</li>
+<li><p>通过HTTPS连接获取代码、提交代码的时候需要输入密码。并且：使用该方式进行提交代码的时候，用户需要配有相关权限。</p>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="4-基本使用命令"><a href="#4-基本使用命令" class="headerlink" title="4. 基本使用命令"></a>4. 基本使用命令</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">初始化当前文件夹为git目录</span><br>git init<br><span class="hljs-meta prompt_"># </span><span class="language-bash">关联远程仓库</span><br>git remote add origin https://gitlab.com/RainbowRing/test.git<br><span class="hljs-meta prompt_"># </span><span class="language-bash">推送以建立连接</span><br>git push -u origin master<br><span class="hljs-meta prompt_"># </span><span class="language-bash">查看git状态（文件提交状态）</span><br>git status<br><span class="hljs-meta prompt_"># </span><span class="language-bash">添加文件到暂存区</span><br>git add 文件路径<br><span class="hljs-meta prompt_"># </span><span class="language-bash">提交到本地仓库</span><br>git commit -m &#x27;提交信息&#x27;<br><span class="hljs-meta prompt_"># </span><span class="language-bash">提交代码到远程仓库</span><br>git push<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">拉取远程代码到本地（本地新建一个远程仓库的副本）</span><br>git clone git@gitlab.com:xxx/yyy.git<br><span class="hljs-meta prompt_"># </span><span class="language-bash">或者</span><br>git clone https://gitlab.com/xxx/yyy.git<br><br></code></pre></td></tr></table></figure>
+
+<h2 id="git中一些参数选项解释"><a href="#git中一些参数选项解释" class="headerlink" title="git中一些参数选项解释"></a>git中一些参数选项解释</h2><table>
+<thead>
+<tr>
+<th align="center">参数</th>
+<th align="center">参数全名</th>
+<th align="center">释意</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">-f</td>
+<td align="center">–force</td>
+<td align="center">强制</td>
+</tr>
+<tr>
+<td align="center">-d</td>
+<td align="center">–delete</td>
+<td align="center">删除</td>
+</tr>
+<tr>
+<td align="center">-D</td>
+<td align="center">–delete –force</td>
+<td align="center">强制删除</td>
+</tr>
+<tr>
+<td align="center">-m</td>
+<td align="center">–move</td>
+<td align="center">移动或重命名</td>
+</tr>
+<tr>
+<td align="center">-M</td>
+<td align="center">–move –force</td>
+<td align="center">强制移动或重命名</td>
+</tr>
+<tr>
+<td align="center">-r</td>
+<td align="center">–remote</td>
+<td align="center">远程</td>
+</tr>
+<tr>
+<td align="center">-a</td>
+<td align="center">–all</td>
+<td align="center">所有</td>
+</tr>
+</tbody></table>
+<h1 id="5-仓库的关联命令"><a href="#5-仓库的关联命令" class="headerlink" title="5. 仓库的关联命令"></a>5. 仓库的关联命令</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">改变原有关联的远程仓库地址</span><br>git remote set-url origin git@gitlab.com:RainbowRing/fromGithub.git<br><span class="hljs-meta prompt_"># </span><span class="language-bash">显示远程origin地址</span><br>git remote show origin<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">如果遇到“fatal: 远程 origin 已经存在。”问题，解决方案：将远程配置删除，重新添加即可</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">删除远程配置</span><br>git remote rm origin<br><span class="hljs-meta prompt_"># </span><span class="language-bash">添加远程配置</span><br>git remote add origin https://github.com/xxx/xxx.git<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="6-分支的基本操作"><a href="#6-分支的基本操作" class="headerlink" title="6. 分支的基本操作"></a>6. 分支的基本操作</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">查看本地所有分支</span><br>git branch<br><span class="hljs-meta prompt_"># </span><span class="language-bash">查看远程所有分支</span><br>git branch -r  <br><span class="hljs-meta prompt_"># </span><span class="language-bash">查看本地和远程的所有分支</span><br>git branch -a<br><span class="hljs-meta prompt_"># </span><span class="language-bash">新建分支</span><br>git branch &lt;branchname&gt;<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">删除本地分支</span><br>git branch -d &lt;branchname&gt; // <br><span class="hljs-meta prompt_"># </span><span class="language-bash">删除远程分支，删除后还需推送到服务器</span><br>git branch -d -r &lt;branchname&gt;<br><span class="hljs-meta prompt_"># </span><span class="language-bash">删除后推送至服务器</span><br>git push origin:&lt;branchname&gt;<br><span class="hljs-meta prompt_"># </span><span class="language-bash">重命名本地分支</span><br>git branch -m &lt;oldbranch&gt; &lt;newbranch&gt;<br><span class="hljs-meta prompt_"># </span><span class="language-bash">重命名远程分支：</span> <br><span class="hljs-meta prompt_"># </span><span class="language-bash">1、删除远程待修改分支</span> <br><span class="hljs-meta prompt_"># </span><span class="language-bash">2、push本地新分支到远程服务器</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="7-Git工作模型介绍"><a href="#7-Git工作模型介绍" class="headerlink" title="7. Git工作模型介绍"></a>7. Git工作模型介绍</h1><h2 id="7-1-工作流模型（结合命令）"><a href="#7-1-工作流模型（结合命令）" class="headerlink" title="7.1. 工作流模型（结合命令）"></a>7.1. 工作流模型（结合命令）</h2><p><img src="/20200805120000/image-20230309000444555.png" srcset="/img/loading.gif" lazyload alt="Git工作流模型"></p>
+<p>Git中代码有三个大环节：暂存区 -&gt; 本地仓库 -&gt; 远程仓库</p>
+<p>对应Git命令说明：</p>
+<ol>
+<li><p>git init</p>
+<p>创建一个本地Repository（也可以通过git clone拉取代码的方式创建一个已经关联远程仓库的本地仓库）。</p>
+</li>
+<li><p>git remote add origin <a target="_blank" rel="noopener" href="https://gitlab.com/xxx/yyy.git">https://gitlab.com/xxx/yyy.git</a></p>
+<p>关联远程仓库。</p>
+</li>
+<li><p>git add</p>
+<p>将本地 workspace 内的代码添加近版本控制（即添加进暂存区）。</p>
+</li>
+<li><p>git commit -m ‘提交信息’</p>
+<p>提交到本地仓库（图中Repository）。</p>
+</li>
+<li><p>git push</p>
+<p>提交代码到远程仓库（图中Remote）。</p>
+<p>这也就是svn用户初次使用git会有”为什么要‘提交’两次”的疑惑的原因了。</p>
+</li>
+</ol>
+<h2 id="7-2-版本控制模型"><a href="#7-2-版本控制模型" class="headerlink" title="7.2. 版本控制模型"></a>7.2. 版本控制模型</h2><p><img src="/20200805120000/image-20230309000842601.png" srcset="/img/loading.gif" lazyload alt="Git版本控制模型"></p>
+<h1 id="8-其他使用问题"><a href="#8-其他使用问题" class="headerlink" title="8. 其他使用问题"></a>8. 其他使用问题</h1><h2 id="git中如何将已commit的代码commit到其它分支"><a href="#git中如何将已commit的代码commit到其它分支" class="headerlink" title="git中如何将已commit的代码commit到其它分支"></a>git中如何将已commit的代码commit到其它分支</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">显示已经提交的提交编码</span><br>git log<br><span class="hljs-meta prompt_"># </span><span class="language-bash">切换分支</span><br>git checkout develop<br><span class="hljs-meta prompt_"># </span><span class="language-bash">通过版本编码更新代码</span><br>git cherry-pick [commit id]<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="git-push详解"><a href="#git-push详解" class="headerlink" title="git push详解"></a>git push详解</h2><p>👉<a target="_blank" rel="noopener" href="https://www.cnblogs.com/guojuboke/p/12750842.html">参考链接</a></p>
+<h2 id="IDEA中解决-git-pull-冲突"><a href="#IDEA中解决-git-pull-冲突" class="headerlink" title="IDEA中解决 git pull 冲突"></a>IDEA中解决 git pull 冲突</h2><p>👉<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_32118691/article/details/106015780">参考链接</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/" class="category-chain-item">技术教程</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/Git/" class="category-chain-item">Git</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Git/">#Git</a>
+      
+        <a href="/tags/Git%E5%91%BD%E4%BB%A4/">#Git命令</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Git使用手册</div>
+      <div>https://binbiubiu.github.io/20200805120000/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Binbiubiu</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2020年8月5日</div>
+        </div>
+      
+      
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/20220101010101/" title="博客网站搭建（Hexo+Github Page）">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">博客网站搭建（Hexo+Github Page）</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/20200723120000/" title="Jenkins自动化部署脚本">
+                        <span class="hidden-mobile">Jenkins自动化部署脚本</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <i class="iconfont icon-love"></i> 技术支持： <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> |  <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

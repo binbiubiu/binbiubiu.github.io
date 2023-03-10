@@ -16,12 +16,12 @@
   <meta name="author" content="Binbiubiu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Jedis快速入门官方地址(Github)Java的maven项目中使用jedis 使用IDEA创建maven项目     pom添加依赖 1234567891011121314&lt;!--jedis--&gt;&lt;dependency&gt;    &lt;groupId&gt;redis.clients&lt;&#x2F;groupId&gt;    &lt;artifactId&gt;jedis">
+    <meta name="description" content="本文介绍如何在Java中通过Jedis使用Redis。  Jedis快速入门官方地址(Github)Java的maven项目中使用jedis 使用IDEA创建maven项目     pom添加依赖 1234567891011121314&lt;!--jedis--&gt;&lt;dependency&gt;    &lt;groupId&gt;redis.clients&lt;&#x2F;groupId&amp;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java中使用Redis（Jedis）">
 <meta property="og:url" content="https://binbiubiu.github.io/20221103130000/index.html">
 <meta property="og:site_name" content="Binbiubiu&#39;s blog">
-<meta property="og:description" content="Jedis快速入门官方地址(Github)Java的maven项目中使用jedis 使用IDEA创建maven项目     pom添加依赖 1234567891011121314&lt;!--jedis--&gt;&lt;dependency&gt;    &lt;groupId&gt;redis.clients&lt;&#x2F;groupId&gt;    &lt;artifactId&gt;jedis">
+<meta property="og:description" content="本文介绍如何在Java中通过Jedis使用Redis。  Jedis快速入门官方地址(Github)Java的maven项目中使用jedis 使用IDEA创建maven项目     pom添加依赖 1234567891011121314&lt;!--jedis--&gt;&lt;dependency&gt;    &lt;groupId&gt;redis.clients&lt;&#x2F;groupId&amp;">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://binbiubiu.github.io/20221103130000/image-20221205231229753.png">
 <meta property="og:image" content="https://binbiubiu.github.io/20221103130000/image-20221205231716161.png">
@@ -42,7 +42,7 @@
 <meta property="og:image" content="https://binbiubiu.github.io/20221103130000/image-20221209133827502.png">
 <meta property="og:image" content="https://binbiubiu.github.io/20221103130000/image-20221209134904232.png">
 <meta property="article:published_time" content="2022-11-03T05:00:00.000Z">
-<meta property="article:modified_time" content="2023-03-08T03:03:47.606Z">
+<meta property="article:modified_time" content="2023-03-09T15:34:29.043Z">
 <meta property="article:author" content="Binbiubiu">
 <meta property="article:tag" content="Java">
 <meta property="article:tag" content="Redis">
@@ -241,7 +241,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.7k 字
+          5.8k 字
         
       </span>
     
@@ -252,7 +252,7 @@
         
         
         
-          48 分钟
+          49 分钟
         
       </span>
     
@@ -295,7 +295,10 @@
             
               <div class="markdown-body">
                 
-                <h1 id="Jedis快速入门"><a href="#Jedis快速入门" class="headerlink" title="Jedis快速入门"></a>Jedis快速入门</h1><h2 id="官方地址-Github"><a href="#官方地址-Github" class="headerlink" title="官方地址(Github)"></a><a target="_blank" rel="noopener" href="https://github.com/redis/jedis">官方地址(Github)</a></h2><h2 id="Java的maven项目中使用jedis"><a href="#Java的maven项目中使用jedis" class="headerlink" title="Java的maven项目中使用jedis"></a>Java的maven项目中使用jedis</h2><ul>
+                <blockquote>
+<p>本文介绍如何在Java中通过Jedis使用Redis。</p>
+</blockquote>
+<h1 id="Jedis快速入门"><a href="#Jedis快速入门" class="headerlink" title="Jedis快速入门"></a>Jedis快速入门</h1><h2 id="官方地址-Github"><a href="#官方地址-Github" class="headerlink" title="官方地址(Github)"></a><a target="_blank" rel="noopener" href="https://github.com/redis/jedis">官方地址(Github)</a></h2><h2 id="Java的maven项目中使用jedis"><a href="#Java的maven项目中使用jedis" class="headerlink" title="Java的maven项目中使用jedis"></a>Java的maven项目中使用jedis</h2><ul>
 <li>使用IDEA创建maven项目</li>
 </ul>
 <p><img src="/20221103130000/image-20221205231229753.png" srcset="/img/loading.gif" lazyload alt="IDEA中创建maven项目1"></p>
@@ -360,7 +363,7 @@
 <p>如果有报错（jackson相关），需要添加 jackson 相关的包依赖，如果项目本身有依赖spring-mvc的话不会报错。</p>
 <p>基本实现原理就是以上这样的，网上也可以查找相关：<code>springboot redistemplate 配置</code>，都大同小异。</p>
 <h3 id="数据对象存储问题"><a href="#数据对象存储问题" class="headerlink" title="数据对象存储问题"></a>数据对象存储问题</h3><p>通过指定的序列化器序列化之后，我们可以看到，如果存储的是对象，redis中会写入类信息，这样就多占用了很大一部分存储空间：</p>
-<p><img src="/20221103130000/image-20221209133827502.png" srcset="/img/loading.gif" lazyload alt="image-20221209133827502"></p>
+<p><img src="/20221103130000/image-20221209133827502.png" srcset="/img/loading.gif" lazyload alt="数据对象存储问题"></p>
 <p>解决方案1，使用StringRedisTemplate，并进行手动反序列化：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.demo.redisdemo;<br><br><span class="hljs-keyword">import</span> com.demo.redisdemo.pojo.User;<br><span class="hljs-keyword">import</span> com.fasterxml.jackson.core.JsonProcessingException;<br><span class="hljs-keyword">import</span> com.fasterxml.jackson.databind.ObjectMapper;<br><span class="hljs-keyword">import</span> org.junit.jupiter.api.Test;<br><span class="hljs-keyword">import</span> org.springframework.beans.factory.annotation.Autowired;<br><span class="hljs-keyword">import</span> org.springframework.boot.test.context.SpringBootTest;<br><span class="hljs-keyword">import</span> org.springframework.data.redis.core.StringRedisTemplate;<br><br><span class="hljs-meta">@SpringBootTest</span><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">RedisTemplateTests</span> &#123;<br><br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> StringRedisTemplate stringRedisTemplate;<br>    <span class="hljs-keyword">private</span> <span class="hljs-type">ObjectMapper</span> <span class="hljs-variable">objectMapper</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ObjectMapper</span>();<br><br>    <span class="hljs-meta">@Test</span><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">testJson</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> JsonProcessingException &#123;<br>        <span class="hljs-comment">// 创建对象</span><br>        <span class="hljs-type">User</span> <span class="hljs-variable">user1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">User</span>(<span class="hljs-string">&quot;王五&quot;</span>, <span class="hljs-number">23</span>);<br>        <span class="hljs-comment">// 手动序列化</span><br>        <span class="hljs-type">String</span> <span class="hljs-variable">userStr1</span> <span class="hljs-operator">=</span> objectMapper.writeValueAsString(user1);<br>        <span class="hljs-comment">// 存入string类型的数据</span><br>        stringRedisTemplate.opsForValue().set(<span class="hljs-string">&quot;user:100&quot;</span>, userStr1);<br><br>        <span class="hljs-comment">// 取出string类型数据</span><br>        <span class="hljs-type">String</span> <span class="hljs-variable">userStr2</span> <span class="hljs-operator">=</span> stringRedisTemplate.opsForValue().get(<span class="hljs-string">&quot;user:100&quot;</span>);<br>        <span class="hljs-comment">// 手动反序列化</span><br>        <span class="hljs-type">User</span> <span class="hljs-variable">user2</span> <span class="hljs-operator">=</span> objectMapper.readValue(userStr2, User.class);<br><br>        System.out.println(<span class="hljs-string">&quot;user=&quot;</span> + user2);<br>    &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
 
@@ -449,22 +452,6 @@
         </div>
       
       
-      
-        <div class="license-meta-item">
-          <div>许可协议</div>
-          <div>
-            
-              
-              
-                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
-                    <i class="iconfont icon-by"></i>
-                  </span>
-                </a>
-              
-            
-          </div>
-        </div>
       
     </div>
     <div class="license-icon iconfont"></div>
