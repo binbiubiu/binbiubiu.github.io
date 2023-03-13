@@ -298,6 +298,490 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/20211215120000/" target="_self">
+          Oracle数据分区导致的问题
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/20211215120000/" target="_self">
+        <div>
+          问题描述现场出现的问题，原有业务不会涉及到某字段的变更，于是对针对该字段进行了分区。 表字段有分区的情况下，更改表字段的值可能会引发 ORA-14402 异常。 解决方案可以通过该开启行迁移的方式解决： 12345--开启行迁移alter table s_95598_wkst enable row movement;--关闭行迁移alter table s_95598_wkst disable r
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-15 12:00" pubdate>
+              2021-12-15
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" class="category-chain-item">问题记录</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/Oracle/" class="category-chain-item">Oracle</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Oracle%E6%95%B0%E6%8D%AE%E5%88%86%E5%8C%BA/">#Oracle数据分区</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/20210903120000/" target="_self">
+          Mybatis中mapper接口的参数不加@Param注解的问题
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/20210903120000/" target="_self">
+        <div>
+          问题描述：👉查看 解决方案：👉查看
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-09-03 12:00" pubdate>
+              2021-09-03
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" class="category-chain-item">问题记录</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/Mybatis/" class="category-chain-item">Mybatis</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Mybatis/">#Mybatis</a>
+            
+              <a href="/tags/java/">#java</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/20210824120000/" target="_self">
+          Oracle查询截至到当前日期月份所在年份的所有月份
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/20210824120000/" target="_self">
+        <div>
+          12345SELECT to_number(TO_CHAR(add_months(trunc(sysdate, &#x27;yy&#x27;), ROWNUM - 1), &#x27;MM&#x27;)) as monthFROM DUALCONNECT BY ROWNUM &lt;=(select months_between(trunc(sysdate, &#x27;mm&#x27;), tr
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-08-24 12:00" pubdate>
+              2021-08-24
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/" class="category-chain-item">技术分享</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/Oracle/" class="category-chain-item">Oracle</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Oracle/">#Oracle</a>
+            
+              <a href="/tags/SQL%E8%AF%AD%E5%8F%A5/">#SQL语句</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/20210823120000/" target="_self">
+          idea中web工程引入js文件不生效的问题
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/20210823120000/" target="_self">
+        <div>
+          【问题描述】 idea中，因为在项目中新建了一个文件夹分类js文件，但是在浏览器中一直访问不到js文件（404，但路径没有错），清除浏览器缓存和重启项目都没有用（Build Module也没用）。 【解决方案】 需要重新构建该目录下的所有文件： 右键文件夹，选择“Rebuild ‘一级路径.二级路径.新文件夹’（Run 和 Debug 上方的选项）
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-08-23 12:00" pubdate>
+              2021-08-23
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" class="category-chain-item">问题记录</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/IDEA/" class="category-chain-item">IDEA</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/IDEA%E7%BC%96%E8%AF%91/">#IDEA编译</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/20210818120000/" target="_self">
+          Oracle ADD_MONTHS()函数进行月份加减计算
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/20210818120000/" target="_self">
+        <div>
+          1234/* * 获取上月同期（上个月同一天） */SELECT to_char(ADD_MONTHS(TO_DATE(&#x27;20210228&#x27;,&#x27;YYYYMMDD&#x27;), 1), &#x27;YYYYMMDD&#x27;) stat_date FROM dual;  关于 ADD_MONTHS()函数问题：不管加减月，如果当前日期是当月最后一天，那么结果也会是那
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-08-18 12:00" pubdate>
+              2021-08-18
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/" class="category-chain-item">技术分享</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/Oracle/" class="category-chain-item">Oracle</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Oracle/">#Oracle</a>
+            
+              <a href="/tags/SQL%E8%AF%AD%E5%8F%A5/">#SQL语句</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/20200810120000/" target="_self">
+          CentOS7找不到jar命令
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/20200810120000/" target="_self">
+        <div>
+          12#解决找不到jar命令yum install java-devel
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-08-10 12:00" pubdate>
+              2020-08-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" class="category-chain-item">问题记录</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/CentOS/" class="category-chain-item">CentOS</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/CentOS/">#CentOS</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/20200810120000/" target="_self">
+          Unresolved compilation problem解决方案
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/20200810120000/" target="_self">
+        <div>
+          异常信息： java.lang.Error: Unresolved compilation problem 【问题原因】 由于电脑上面有多个jdk版本，而 Eclipse 使用默认版本，使得 IDE 的Compiler Compliance level 与 Installed JREs 版本不对应而导致错误。 【解决方案】 将 IDE 的Compiler Compliance level 与 In
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-08-10 12:00" pubdate>
+              2020-08-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" class="category-chain-item">问题记录</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/Java/" class="category-chain-item">Java</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Java/">#Java</a>
+            
+              <a href="/tags/Java%E5%BC%82%E5%B8%B8/">#Java异常</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/20200810120000/" target="_self">
           win10按win键失效问题
         </a>
@@ -430,357 +914,11 @@
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/20200723120000/" target="_self">
-          Jenkins自动化部署脚本
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/20200723120000/" target="_self">
-        <div>
-          记录学习Jenkins时，自动化部署tomcat项目的脚本。  新建 deploy.sh 脚本文件，文件内容如下： 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566#!/usr/bin/env bas
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-07-23 12:00" pubdate>
-              2020-07-23
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/" class="category-chain-item">技术分享</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/Jenkins/" class="category-chain-item">Jenkins</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Jenkins/">#Jenkins</a>
-            
-              <a href="/tags/Jenkins%E8%84%9A%E6%9C%AC/">#Jenkins脚本</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/20200722120000/" target="_self">
-          IE浏览器部分网站中文无法正常显示问题
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/20200722120000/" target="_self">
-        <div>
-          IE浏览器部分网站中文无法正常显示问题问题描述：IE浏览器部分网站中文无法正常显示，显示为英文。 问题说明：由于 IE11 中微软弃用了 zh_CN 语言，进而采用 zh_hans_CN， 造成前台请求后台数据后，前台页面不能正常国际化问题。 解决方案：  方案1. 修改windows注册表信息。 新建一个 xxx.reg 文件，内容如下： 12345Windows Registry Editor
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-07-22 12:00" pubdate>
-              2020-07-22
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" class="category-chain-item">问题记录</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/IE%E6%B5%8F%E8%A7%88%E5%99%A8/" class="category-chain-item">IE浏览器</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/IE%E6%B5%8F%E8%A7%88%E5%99%A8/">#IE浏览器</a>
-            
-              <a href="/tags/%E6%B1%89%E5%8C%96/">#汉化</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/20200717120000/" target="_self">
-          Jenkins使用手册
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/20200717120000/" target="_self">
-        <div>
-          本文介绍Jenkins的安装与使用。  下载👉Jenkins官网 的 下载页面。 windows就下载for windows版本的（这里以windows环境安装为例）。 安装 安装完毕后会自动进入登陆页面：  配置与使用第一次启动你可能会有这样的问题：它会一直在这个登录页面自动刷新。 主要原因是Jenkins在启动的时候会去加载相关镜像文件，默认的镜像文件配置地址对我们比较不友好（你懂的），这
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-07-17 12:00" pubdate>
-              2020-07-17
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/" class="category-chain-item">技术分享</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/Jenkins/" class="category-chain-item">Jenkins</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Jenkins/">#Jenkins</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/20200526123000/" target="_self">
-          iOS APP降级
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/20200526123000/" target="_self">
-        <div>
-          降级教程参考👉原文地址 在线查询app历史版本  1. 工具准备 iTunes，需要12.6.5以下的版本 ，因为12.6.5以上的版本均取消了Apple Store。  Fiddler，请求拦截工具，也可使用其他自己熟悉的工具，如HttpWatch、BurpSuite等。   2. 配置 Fiddler 打开Fiddler，Tools-Fiddler options-HTTPS-全部打勾✔-
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-05-26 12:30" pubdate>
-              2020-05-26
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/" class="category-chain-item">技术分享</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/IOS/" class="category-chain-item">IOS</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/IOS/">#IOS</a>
-            
-              <a href="/tags/APP%E9%99%8D%E7%BA%A7/">#APP降级</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/20190930120855/" target="_self">
-          Eclipse插件（更新中）
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/20190930120855/" target="_self">
-        <div>
-          本文主要分享一些在用的 Eclipse插件。  打开文件所在位置（资源管理器打开） 插件名称：OpenExplorer  👉下载地址。  使用方式  将jar包放到eclipse的plugin目录中，重启eclipse。  选中要查看目录的文件，点击上方横向工具栏中的Open Explorer图标可以实现在window资源管理器中查看目录。    类似插件    👉下载地址。 👉源码地址。
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2019-09-30 12:08" pubdate>
-              2019-09-30
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/" class="category-chain-item">资源分享</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/Eclipse/" class="category-chain-item">Eclipse</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Eclipse%E6%8F%92%E4%BB%B6/">#Eclipse插件</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/#board">6</a><a class="extend next" rel="next" href="/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 
