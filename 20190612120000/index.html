@@ -16,15 +16,15 @@
   <meta name="author" content="Binbiubiu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="SQL查看存储过程执行日志： &#96;&#96;&#96;sqlselect t.sql_id,    t.sql_text,    s.plan_hash_value,    s.optimizer_cost, s.executions_total, s.elapsed_time_total, s.disk_reads_total, s.buffer_gets_total  from DBA_">
+    <meta name="description" content="SQL查看存储过程执行日志： 1234567891011select t.sql_id,    t.sql_text,    s.plan_hash_value,    s.optimizer_cost,    s.executions_total,    s.elapsed_time_total,    s.disk_reads_total,    s.buffer_gets_totalfrom">
 <meta property="og:type" content="article">
 <meta property="og:title" content="查看存储过程执行日志">
 <meta property="og:url" content="https://binbiubiu.github.io/20190612120000/index.html">
 <meta property="og:site_name" content="Binbiubiu&#39;s blog">
-<meta property="og:description" content="SQL查看存储过程执行日志： &#96;&#96;&#96;sqlselect t.sql_id,    t.sql_text,    s.plan_hash_value,    s.optimizer_cost, s.executions_total, s.elapsed_time_total, s.disk_reads_total, s.buffer_gets_total  from DBA_">
+<meta property="og:description" content="SQL查看存储过程执行日志： 1234567891011select t.sql_id,    t.sql_text,    s.plan_hash_value,    s.optimizer_cost,    s.executions_total,    s.elapsed_time_total,    s.disk_reads_total,    s.buffer_gets_totalfrom">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-06-12T04:00:00.000Z">
-<meta property="article:modified_time" content="2023-03-13T07:18:24.629Z">
+<meta property="article:modified_time" content="2023-03-15T09:17:08.289Z">
 <meta property="article:author" content="Binbiubiu">
 <meta property="article:tag" content="Oracle">
 <meta property="article:tag" content="SQL语句">
@@ -276,14 +276,7 @@
               <div class="markdown-body">
                 
                 <p>SQL查看存储过程执行日志：</p>
-<p>&#96;&#96;&#96;sql<br>select t.sql_id,<br>    t.sql_text,<br>    s.plan_hash_value,<br>    s.optimizer_cost,</p>
-<pre><code class="hljs">s.executions_total,
-s.elapsed_time_total,
-s.disk_reads_total,
-s.buffer_gets_total
-</code></pre>
-<p>from DBA_HIST_SQLSTAT s, DBA_HIST_SQLTEXT t<br>where s.sql_id&#x3D;t.sql_id<br>and t.sql_text like’%存储过程名称%’;</p>
-
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> t.sql_id,<br>    t.sql_text,<br>    s.plan_hash_value,<br>    s.optimizer_cost,<br>    s.executions_total,<br>    s.elapsed_time_total,<br>    s.disk_reads_total,<br>    s.buffer_gets_total<br><span class="hljs-keyword">from</span> DBA_HIST_SQLSTAT s, DBA_HIST_SQLTEXT t<br><span class="hljs-keyword">where</span> s.sql_id<span class="hljs-operator">=</span>t.sql_id<br><span class="hljs-keyword">and</span> t.sql_text <span class="hljs-keyword">like</span><span class="hljs-string">&#x27;%存储过程名称%&#x27;</span>;<br></code></pre></td></tr></table></figure>
                 
               </div>
             

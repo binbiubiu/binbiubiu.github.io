@@ -1,0 +1,758 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/blogger-logo.png">
+  <link rel="icon" href="/img/blogger-logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Binbiubiu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="本文主要介绍RPC框架Dubbo，简单介绍了Dubbo的一些功能特性。 👉官网地址。  Dubbo概念Dubbo是阿里巴巴公司开源的一个高性能、轻量级的 Java RPC 框架。 致力于提供高性能和透明化的 RPC 远程服务调用方案，以及 SOA 服务治理方案。 👉官网地址。 Dubbo架构👉官方Dubbo架构介绍。 架构图 节点角色说明   节点 角色说明    Provider 暴露服">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Dubbo介绍">
+<meta property="og:url" content="https://binbiubiu.github.io/20230314160000/index.html">
+<meta property="og:site_name" content="Binbiubiu&#39;s blog">
+<meta property="og:description" content="本文主要介绍RPC框架Dubbo，简单介绍了Dubbo的一些功能特性。 👉官网地址。  Dubbo概念Dubbo是阿里巴巴公司开源的一个高性能、轻量级的 Java RPC 框架。 致力于提供高性能和透明化的 RPC 远程服务调用方案，以及 SOA 服务治理方案。 👉官网地址。 Dubbo架构👉官方Dubbo架构介绍。 架构图 节点角色说明   节点 角色说明    Provider 暴露服">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://binbiubiu.github.io/20230314160000/image-20230314162351986-1678865274029-2.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20230314160000/image-20230315154021110.png">
+<meta property="article:published_time" content="2023-03-14T08:00:00.000Z">
+<meta property="article:modified_time" content="2023-03-15T08:05:21.242Z">
+<meta property="article:author" content="Binbiubiu">
+<meta property="article:tag" content="Dubbo">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://binbiubiu.github.io/20230314160000/image-20230314162351986-1678865274029-2.png">
+  
+  
+  
+  <title>Dubbo介绍 - Binbiubiu&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"binbiubiu.github.io","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>BinBiuBiu&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Dubbo介绍"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-03-14 16:00" pubdate>
+          2023年3月14日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          17 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Dubbo介绍</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <blockquote>
+<p>本文主要介绍RPC框架Dubbo，简单介绍了Dubbo的一些功能特性。</p>
+<p>👉<a target="_blank" rel="noopener" href="https://cn.dubbo.apache.org/zh-cn/">官网地址</a>。</p>
+</blockquote>
+<h1 id="Dubbo概念"><a href="#Dubbo概念" class="headerlink" title="Dubbo概念"></a>Dubbo概念</h1><p>Dubbo是阿里巴巴公司开源的一个高性能、轻量级的 <em><strong>Java RPC 框架</strong></em>。</p>
+<p>致力于提供高性能和透明化的 RPC 远程服务调用方案，以及 SOA 服务治理方案。</p>
+<p>👉<a target="_blank" rel="noopener" href="https://cn.dubbo.apache.org/zh-cn/">官网地址</a>。</p>
+<h1 id="Dubbo架构"><a href="#Dubbo架构" class="headerlink" title="Dubbo架构"></a>Dubbo架构</h1><p>👉<a target="_blank" rel="noopener" href="https://cn.dubbo.apache.org/zh-cn/overview/mannual/java-sdk/concepts-and-architecture/overall-architecture/">官方Dubbo架构介绍</a>。</p>
+<h2 id="架构图"><a href="#架构图" class="headerlink" title="架构图"></a>架构图</h2><p><img src="/20230314160000/image-20230314162351986-1678865274029-2.png" srcset="/img/loading.gif" lazyload alt="官方Dubbo架构图"></p>
+<h2 id="节点角色说明"><a href="#节点角色说明" class="headerlink" title="节点角色说明"></a>节点角色说明</h2><table>
+<thead>
+<tr>
+<th>节点</th>
+<th>角色说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Provider</code></td>
+<td>暴露服务的服务提供方</td>
+</tr>
+<tr>
+<td><code>Consumer</code></td>
+<td>调用远程服务的服务消费方</td>
+</tr>
+<tr>
+<td><code>Registry</code></td>
+<td>服务注册与发现的注册中心</td>
+</tr>
+<tr>
+<td><code>Monitor</code></td>
+<td>统计服务的调用次数和调用时间的监控中心</td>
+</tr>
+<tr>
+<td><code>Container</code></td>
+<td>服务运行容器</td>
+</tr>
+</tbody></table>
+<h1 id="Dubbo快速入门"><a href="#Dubbo快速入门" class="headerlink" title="Dubbo快速入门"></a>Dubbo快速入门</h1><p>可以参考<a target="_blank" rel="noopener" href="https://cn.dubbo.apache.org/zh-cn/overview/home/">官方中文文档</a>进行使用。</p>
+<p>使用dubbo有一个大前提：需要先安装注册中心，如<strong>zookeeper</strong>（官方推荐）、<strong>nacos</strong>、<strong>redis</strong>等。</p>
+<h1 id="Dubbo高级特性"><a href="#Dubbo高级特性" class="headerlink" title="Dubbo高级特性"></a>Dubbo高级特性</h1><h2 id="1-dubbo-admin"><a href="#1-dubbo-admin" class="headerlink" title="1. dubbo-admin"></a>1. dubbo-admin</h2><p>dubbo-admin是dubbo的一个管理平台，提供图形化的服务管理页面。</p>
+<p>是一个前后端分离的项目，前端使用vue，后端使用springboot。</p>
+<p>安装 dubbo-admin 其实就是部署该项目。</p>
+<p>👉<a target="_blank" rel="noopener" href="https://github.com/apache/dubbo-admin">项目地址</a>。</p>
+<h2 id="2-序列化"><a href="#2-序列化" class="headerlink" title="2. 序列化"></a>2. 序列化</h2><p><img src="/20230314160000/image-20230315154021110.png" srcset="/img/loading.gif" lazyload alt="Dubbo的Java对象传输"></p>
+<p>dubbo 内部已经将序列化和反序列化的过程内部封装了，我们只需要在定义pojo类时<strong>实现Serializable接口</strong>即可。一般会定义一个公共的包含pojo的模块，让生产者和消费者都依赖该模块。</p>
+<h2 id="3-地址缓存"><a href="#3-地址缓存" class="headerlink" title="3. 地址缓存"></a>3. 地址缓存</h2><p>注册中心挂了，服务是否可以正常访问？</p>
+<p>答案是可以。</p>
+<p>因为dubbo服务消费者在第一次调用时，会将服务提供方地址缓存到本地，以后在调用则不会访问注册中心。</p>
+<p>当服务提供者地址发生变化时，注册中心会通知服务消费者。</p>
+<h2 id="4-超时"><a href="#4-超时" class="headerlink" title="4. 超时"></a>4. 超时</h2><p>服务消费者在调用服务提供者的时候发生了阻塞、等待的情形，这个时候，服务消费者会一直等待下去。</p>
+<p>在某个峰值时刻，大量的请求都在同时请求服务消费者，会造成线程的大量堆积，势必会造成雪崩。</p>
+<p>dubbo 利用超时机制来解决这个问题，设置一个超时时间，在这个时间段内，无法完成服务访问，则自动断开连接。使用 timeout 属性配置超时时间，默认值1000，单位毫秒。</p>
+<p>设置方式：</p>
+<ul>
+<li><p>生产者：dubbo的**@Service<strong>注解添加</strong>timeout**属性。</p>
+</li>
+<li><p>消费者：dubbo的**@Reference<strong>注解添加</strong>timeout**属性。</p>
+</li>
+</ul>
+<h2 id="5-重试"><a href="#5-重试" class="headerlink" title="5. 重试"></a>5. 重试</h2><p>设置了超时时间，在这个时间段内，无法完成服务访问，则自动断开连接。</p>
+<p>如果出现网络抖动，则这一次请求就会失败。</p>
+<p>Dubbo 提供重试机制来避免类似问题的发生。</p>
+<p>通过设置 retries 属性来设置重试次数。默认为 2 次。</p>
+<p>设置方式：</p>
+<ul>
+<li>生产者：dubbo的**@Service<strong>注解添加</strong>retries**属性。</li>
+<li>消费者：dubbo的**@Reference<strong>注解添加</strong>retries**属性。</li>
+</ul>
+<h2 id="6-多版本"><a href="#6-多版本" class="headerlink" title="6. 多版本"></a>6. 多版本</h2><p>灰度发布：当出现新功能时，会让一部分用户先使用新功能，用户反馈没问题时，再将所有用户迁移到新功能。</p>
+<p>dubbo 中使用 version 属性来设置和调用同一个接口的不同版本。</p>
+<p>设置方式：</p>
+<ul>
+<li><p>生产者：dubbo的**@Service<strong>注解添加</strong>version**属性。</p>
+</li>
+<li><p>消费者：dubbo的**@Reference<strong>注解添加</strong>version**属性。</p>
+</li>
+</ul>
+<h2 id="7-负载均衡"><a href="#7-负载均衡" class="headerlink" title="7. 负载均衡"></a>7. 负载均衡</h2><p>负载均衡策略（4种）：</p>
+<ul>
+<li><p>Random ：按权重随机，默认值。按权重设置随机概率。</p>
+</li>
+<li><p>RoundRobin ：按权重轮询。</p>
+</li>
+<li><p>LeastActive：最少活跃调用数，相同活跃数的随机。</p>
+</li>
+<li><p>ConsistentHash：一致性 Hash，相同参数的请求总是发到同一提供者。</p>
+</li>
+</ul>
+<p>设置方式：</p>
+<ul>
+<li>生产者：dubbo的**@Service<strong>注解添加</strong>loadBalance**属性。</li>
+</ul>
+<h2 id="8-集群容错"><a href="#8-集群容错" class="headerlink" title="8. 集群容错"></a>8. 集群容错</h2><p>集群容错：</p>
+<ul>
+<li><p>Failover Cluster：失败重试。默认值。当出现失败，重试其它服务器 ，默认重试2次，使用 retries 配置。一般用于读操作</p>
+</li>
+<li><p>Failfast Cluster ：快速失败，只发起一次调用，失败立即报错。通常用于写操作。</p>
+</li>
+<li><p>Failsafe Cluster ：失败安全，出现异常时，直接忽略。返回一个空结果。</p>
+</li>
+<li><p>Failback Cluster ：失败自动恢复，后台记录失败请求，定时重发。通常用于消息通知操作。</p>
+</li>
+<li><p>Forking Cluster ：并行调用多个服务器，只要一个成功即返回。</p>
+</li>
+<li><p>Broadcast  Cluster ：广播调用所有提供者，逐个调用，任意一台报错则报错。</p>
+</li>
+</ul>
+<p>设置方式：</p>
+<ul>
+<li>生产者：dubbo的**@Service<strong>注解添加</strong>cluster**属性。</li>
+</ul>
+<h2 id="9-服务降级"><a href="#9-服务降级" class="headerlink" title="9. 服务降级"></a>9. 服务降级</h2><p>服务降级，通过一定的设置来降低部分服务的使用率，以达到提高其他服务性能的目的。</p>
+<p><code>mock=force:return null</code> ，不远程调用服务，直接返回null。</p>
+<p><code>mock=fail:return null</code> ，服务如果调用失败，直接返回null。</p>
+<p>设置方式：</p>
+<ul>
+<li>生产者：dubbo的**@Service<strong>注解添加</strong>mock**属性。</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/" class="category-chain-item">技术分享</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/Dubbo/" class="category-chain-item">Dubbo</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Dubbo/">#Dubbo</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Dubbo介绍</div>
+      <div>https://binbiubiu.github.io/20230314160000/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Binbiubiu</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年3月14日</div>
+        </div>
+      
+      
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/20230314161000/" title="Zookeeper安装">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Zookeeper安装</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/20230314150000/" title="系统架构的演进">
+                        <span class="hidden-mobile">系统架构的演进</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <i class="iconfont icon-love"></i> 技术支持： <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> |  <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

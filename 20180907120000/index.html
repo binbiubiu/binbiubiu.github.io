@@ -18,13 +18,13 @@
   
     <meta name="description" content="【问题描述】 12运行Tomcat出现异常：java.lang.OutOfMemoryError: PermGen space    【解决方案】 双击下方Servers标签的Tomcat，选择 Open launch configuration，在打开的窗口中选择Arguments标签，在VM Arguments的内容中追加： 1-Xms512m -Xmx1024m -XX:MaxNewSize">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Eclipse中为Tomcat配置内存">
+<meta property="og:title" content="Tomcat内存溢出问题">
 <meta property="og:url" content="https://binbiubiu.github.io/20180907120000/index.html">
 <meta property="og:site_name" content="Binbiubiu&#39;s blog">
 <meta property="og:description" content="【问题描述】 12运行Tomcat出现异常：java.lang.OutOfMemoryError: PermGen space    【解决方案】 双击下方Servers标签的Tomcat，选择 Open launch configuration，在打开的窗口中选择Arguments标签，在VM Arguments的内容中追加： 1-Xms512m -Xmx1024m -XX:MaxNewSize">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2018-09-07T04:00:00.000Z">
-<meta property="article:modified_time" content="2023-03-13T07:40:49.264Z">
+<meta property="article:modified_time" content="2023-03-15T09:21:47.968Z">
 <meta property="article:author" content="Binbiubiu">
 <meta property="article:tag" content="Tomcat">
 <meta property="article:tag" content="JVM">
@@ -32,7 +32,7 @@
   
   
   
-  <title>Eclipse中为Tomcat配置内存 - Binbiubiu&#39;s blog</title>
+  <title>Tomcat内存溢出问题 - Binbiubiu&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +198,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Eclipse中为Tomcat配置内存"></span>
+            <span id="subtitle" data-typed-text="Tomcat内存溢出问题"></span>
           
         </div>
 
@@ -221,7 +221,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          526 字
+          490 字
         
       </span>
     
@@ -270,7 +270,7 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Eclipse中为Tomcat配置内存</h1>
+            <h1 style="display: none">Tomcat内存溢出问题</h1>
             
             
               <div class="markdown-body">
@@ -284,11 +284,43 @@
 <p>双击下方Servers标签的Tomcat，选择 Open launch configuration，在打开的窗口中选择Arguments标签，在VM Arguments的内容中追加：</p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">-Xms512m -Xmx1024m -XX:<span class="hljs-attribute">MaxNewSize</span>=256m -XX:<span class="hljs-attribute">MaxPermSize</span>=512m<br></code></pre></td></tr></table></figure>
 
-
-
 <p>参数说明：</p>
-<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs diff"><span class="hljs-deletion">-Xms：java Heap初始大小。 默认是物理内存的1/64。</span><br><span class="hljs-deletion">-Xmx：java heap最大值。建议均设为物理内存的一半。不可超过物理内存。</span><br><span class="hljs-deletion">-XX:PermSize:设定内存的永久保存区初始大小，缺省值为64M。（我用visualvm.exe查看的）</span><br><span class="hljs-deletion">-XX:MaxPermSize:设定内存的永久保存区最大 大小，缺省值为64M。（我用visualvm.exe查看的）</span><br><span class="hljs-deletion">-XX:SurvivorRatio=2 :生还者池的大小,默认是2，如果垃圾回收变成了瓶颈，您可以尝试定制生成池设置</span><br><span class="hljs-deletion">-XX:NewSize: 新生成的池的初始大小。 缺省值为2M。</span><br><span class="hljs-deletion">-XX:MaxNewSize: 新生成的池的最大大小。  缺省值为32M。</span><br></code></pre></td></tr></table></figure>
-
+<table>
+<thead>
+<tr>
+<th align="center">参数</th>
+<th align="center">参数说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">-Xms</td>
+<td align="center">java Heap初始大小。 默认是物理内存的1&#x2F;64。</td>
+</tr>
+<tr>
+<td align="center">-Xmx</td>
+<td align="center">java heap最大值。建议均设为物理内存的一半。不可超过物理内存。</td>
+</tr>
+<tr>
+<td align="center">-XX:PermSize</td>
+<td align="center">设定内存的永久保存区初始大小，缺省值为64M。</td>
+</tr>
+<tr>
+<td align="center">-XX:MaxPermSize</td>
+<td align="center">设定内存的永久保存区最大 大小，缺省值为64M。</td>
+</tr>
+<tr>
+<td align="center">-XX:SurvivorRatio&#x3D;2</td>
+<td align="center">幸存者池的大小,默认是2，如果垃圾回收变成了瓶颈，可以尝试定制生成池设置。</td>
+</tr>
+<tr>
+<td align="center">-XX:NewSize</td>
+<td align="center">新生成的池的初始大小。缺省值为2M。</td>
+</tr>
+<tr>
+<td align="center">-XX:MaxNewSize</td>
+<td align="center">新生成的池的最大大小。缺省值为32M。</td>
+</tr>
+</tbody></table>
 
                 
               </div>
@@ -343,7 +375,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Eclipse中为Tomcat配置内存</div>
+      <div>Tomcat内存溢出问题</div>
       <div>https://binbiubiu.github.io/20180907120000/</div>
     </div>
     <div class="license-meta">

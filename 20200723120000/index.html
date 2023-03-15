@@ -16,23 +16,57 @@
   <meta name="author" content="Binbiubiu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="记录学习Jenkins时，自动化部署tomcat项目的脚本。  新建 deploy.sh 脚本文件，文件内容如下： 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566#!&#x2F;usr&#x2F;bin&#x2F;env bas">
+    <meta name="description" content="本文介绍Jenkins的安装与使用。  下载👉Jenkins官网 的 下载页面。 windows就下载for windows版本的（这里以windows环境安装为例）。 安装 安装完毕后会自动进入登陆页面：  配置与使用第一次启动你可能会有这样的问题：它会一直在这个登录页面自动刷新。 主要原因是Jenkins在启动的时候会去加载相关镜像文件，默认的镜像文件配置地址对我们比较不友好（你懂的），这">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Jenkins自动化部署脚本">
+<meta property="og:title" content="Jenkins使用手册">
 <meta property="og:url" content="https://binbiubiu.github.io/20200723120000/index.html">
 <meta property="og:site_name" content="Binbiubiu&#39;s blog">
-<meta property="og:description" content="记录学习Jenkins时，自动化部署tomcat项目的脚本。  新建 deploy.sh 脚本文件，文件内容如下： 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566#!&#x2F;usr&#x2F;bin&#x2F;env bas">
+<meta property="og:description" content="本文介绍Jenkins的安装与使用。  下载👉Jenkins官网 的 下载页面。 windows就下载for windows版本的（这里以windows环境安装为例）。 安装 安装完毕后会自动进入登陆页面：  配置与使用第一次启动你可能会有这样的问题：它会一直在这个登录页面自动刷新。 主要原因是Jenkins在启动的时候会去加载相关镜像文件，默认的镜像文件配置地址对我们比较不友好（你懂的），这">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://binbiubiu.github.io/20200723120000/image-20230309002331438.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20200723120000/image-20230309002401085.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20200723120000/image-20230309002900344.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20200723120000/image-20230309002914803.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20200723120000/image-20230309003131885.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20200723120000/image-20230309003139392.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20200723120000/image-20230309003155681.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20200723120000/image-20230309003243071.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20200723120000/image-20230309003304652.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20200723120000/image-20230309003313434.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20200723120000/image-20230309003337074.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20200723120000/image-20230309003350745.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20200723120000/image-20230309003406451.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20200723120000/image-20230309003425900.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20200723120000/image-20230309003444965.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20200723120000/image-20230309003449283.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20200723120000/image-20230309003453813-1678293294326-1.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20200723120000/image-20230309003503103.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20200723120000/image-20230309003701457.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20200723120000/image-20230309003740927.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20200723120000/image-20230309003748084.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20200723120000/image-20230309003820212.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20200723120000/image-20230309003825982.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20200723120000/image-20230309003907541.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20200723120000/image-20230309003913189.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20200723120000/image-20230309003921720.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20200723120000/image-20230309003928911.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20200723120000/image-20230309003935299.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20200723120000/image-20230309004004086.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20200723120000/image-20230309004014886.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20200723120000/image-20230309004026782.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20200723120000/image-20230309004040680.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20200723120000/image-20230309004059676.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20200723120000/image-20230309004138691.png">
 <meta property="article:published_time" content="2020-07-23T04:00:00.000Z">
-<meta property="article:modified_time" content="2023-03-10T03:40:02.063Z">
+<meta property="article:modified_time" content="2023-03-15T09:14:28.577Z">
 <meta property="article:author" content="Binbiubiu">
 <meta property="article:tag" content="Jenkins">
-<meta property="article:tag" content="Jenkins脚本">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://binbiubiu.github.io/20200723120000/image-20230309002331438.png">
   
   
   
-  <title>Jenkins自动化部署脚本 - Binbiubiu&#39;s blog</title>
+  <title>Jenkins使用手册 - Binbiubiu&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -198,7 +232,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Jenkins自动化部署脚本"></span>
+            <span id="subtitle" data-typed-text="Jenkins使用手册"></span>
           
         </div>
 
@@ -221,7 +255,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.3k 字
+          1.9k 字
         
       </span>
     
@@ -232,7 +266,7 @@
         
         
         
-          12 分钟
+          17 分钟
         
       </span>
     
@@ -270,17 +304,104 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Jenkins自动化部署脚本</h1>
+            <h1 style="display: none">Jenkins使用手册</h1>
             
             
               <div class="markdown-body">
                 
                 <blockquote>
-<p>记录学习Jenkins时，自动化部署tomcat项目的脚本。</p>
+<p>本文介绍Jenkins的安装与使用。</p>
 </blockquote>
-<p>新建 <code>deploy.sh</code> 脚本文件，文件内容如下：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-meta">#!/usr/bin/env bash</span><br><br>: &lt;&lt; !<br><span class="hljs-comment"># 该注释内容为 Jenkins 中的shell脚本</span><br><span class="hljs-comment"># 表示部署完不kill进程，jenkins进程执行完会自动关闭，否则会把启动的server也关闭掉，</span><br>BUILD_ID=DONTKILLME<br><span class="hljs-comment"># 加载配置文件</span><br>. /etc/profile<br><br><span class="hljs-comment"># 执行.sh前需要配置(声明)如下参数</span><br><span class="hljs-comment"># 1.服务器上项目路径(不含项目名)</span><br><span class="hljs-built_in">export</span> PROJECT_PATH=/root/projects/java<br><br><span class="hljs-comment"># 2.项目名,同xxx.git</span><br><span class="hljs-built_in">export</span> PROJECT_NAME=LoginDemo<br><br><span class="hljs-comment"># 3.tomcat在服务机器上的全路径</span><br><span class="hljs-built_in">export</span> TOMCAT_PATH=/root/apache-tomcat-9.0.37<br><br><span class="hljs-comment"># 4.运行部署脚本（项目目录下的deploy.sh脚本）</span><br>sh <span class="hljs-variable">$PROJECT_PATH</span>/<span class="hljs-variable">$PROJECT_NAME</span>/deploy.sh<br>!<br><br><br><span class="hljs-comment"># 以下为脚本正文：</span><br><span class="hljs-comment"># 自动部署步骤：git同步最新代码 &gt; maven 打包 &gt; 停止tomcat &gt; 部署应用 &gt; 启动tomcat</span><br><br><span class="hljs-comment">### 函数:关闭tomcat(也可以通过 Tomcat 的 shutdown.sh 停止服务器)</span><br><span class="hljs-function"><span class="hljs-title">killTomcat</span></span>()<br>&#123;<br>    pid=`ps -ef|grep tomcat|grep java|awk <span class="hljs-string">&#x27;&#123;print $2&#125;&#x27;</span>`<br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;tomcat Id list :<span class="hljs-variable">$pid</span>&quot;</span><br>    <span class="hljs-keyword">if</span> [ <span class="hljs-string">&quot;<span class="hljs-variable">$pid</span>&quot;</span> = <span class="hljs-string">&quot;&quot;</span> ]<br>    <span class="hljs-keyword">then</span><br>      <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;no tomcat pid alive&quot;</span><br>    <span class="hljs-keyword">else</span><br>      <span class="hljs-built_in">kill</span> -9 <span class="hljs-variable">$pid</span><br>    <span class="hljs-keyword">fi</span><br>&#125;<br><br><span class="hljs-comment"># 删除本地旧代码(文件夹)</span><br><span class="hljs-built_in">rm</span> -rf <span class="hljs-variable">$PROJECT_PATH</span>/<span class="hljs-variable">$PROJECT_NAME</span><br><span class="hljs-comment"># 拉取新代码</span><br><span class="hljs-built_in">cd</span> <span class="hljs-variable">$PROJECT_PATH</span><br>git <span class="hljs-built_in">clone</span> git@gitlab.com:RainbowRing/LoginDemo.git<br><br><span class="hljs-comment"># 构建项目</span><br><span class="hljs-built_in">cd</span> <span class="hljs-variable">$PROJECT_PATH</span>/<span class="hljs-variable">$PROJECT_NAME</span><br>mvn clean install<br><br><span class="hljs-comment"># 停止tomcat</span><br>killTomcat<br><br><span class="hljs-comment"># 删除原有工程</span><br><span class="hljs-built_in">rm</span> -f <span class="hljs-variable">$TOMCAT_PATH</span>/webapps/<span class="hljs-variable">$PROJECT_NAME</span>.war<br><br><span class="hljs-comment"># 复制maven打包后的工程到tomcat的webapps目录下</span><br><span class="hljs-built_in">cp</span> <span class="hljs-variable">$PROJECT_PATH</span>/<span class="hljs-variable">$PROJECT_NAME</span>/target/<span class="hljs-variable">$PROJECT_NAME</span>.war <span class="hljs-variable">$TOMCAT_PATH</span>/webapps/<br><br><span class="hljs-comment"># 重命名工程(如果需要的话)</span><br><span class="hljs-comment">#cd $TOMCAT_PATH/webapps/</span><br><span class="hljs-comment">#mv LoginDemo loginDemo</span><br><br><span class="hljs-comment"># 启动Tomcat</span><br><span class="hljs-built_in">cd</span> <span class="hljs-variable">$TOMCAT_PATH</span>/<br>sh bin/startup.sh<br></code></pre></td></tr></table></figure>
-
+<h1 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h1><p>👉<a target="_blank" rel="noopener" href="https://www.jenkins.io/">Jenkins官网</a> 的 <a target="_blank" rel="noopener" href="https://www.jenkins.io/zh/download/">下载页面</a>。</p>
+<p>windows就下载for windows版本的（这里以windows环境安装为例）。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p><img src="/20200723120000/image-20230309002331438.png" srcset="/img/loading.gif" lazyload alt="Jenkins安装"></p>
+<p>安装完毕后会自动进入登陆页面：</p>
+<p><img src="/20200723120000/image-20230309002401085.png" srcset="/img/loading.gif" lazyload alt="Jenkins登陆页面"></p>
+<h1 id="配置与使用"><a href="#配置与使用" class="headerlink" title="配置与使用"></a>配置与使用</h1><p>第一次启动你可能会有这样的问题：它会一直在这个登录页面自动刷新。</p>
+<p>主要原因是Jenkins在启动的时候会去加载相关镜像文件，默认的镜像文件配置地址对我们比较不友好（你懂的），这就需要我们手动修改这个文件。</p>
+<h2 id="镜像配置"><a href="#镜像配置" class="headerlink" title="镜像配置"></a>镜像配置</h2><p>在Jenkins安装目录下，找到 <code>hudson.model.UpdateCenter.xml</code> 文件，打开并修改url为：<code>https://mirrors.tuna.tsinghua.edu.cn/jenkins/updates/update-center.json</code></p>
+<p><img src="/20200723120000/image-20230309002900344.png" srcset="/img/loading.gif" lazyload alt="镜像配置"></p>
+<p><img src="/20200723120000/image-20230309002914803.png" srcset="/img/loading.gif" lazyload alt="镜像配置"></p>
+<p>修改后需要重启Jenkins服务。</p>
+<p>当然你也有可能遇到端口冲突的问题，那么来修改一下端口吧。</p>
+<h2 id="修改端口"><a href="#修改端口" class="headerlink" title="修改端口"></a>修改端口</h2><p>在安装目录下找到 <code>Jenkins.xml</code> 文件，这个就是端口配置的文件了。</p>
+<h2 id="启动Jenkins服务"><a href="#启动Jenkins服务" class="headerlink" title="启动Jenkins服务"></a>启动Jenkins服务</h2><p>如果是通过msi方式安装Jenkins的话（比如本安装教程），需要在系统的“服务”中找到Jenkins服务，点击重启即可（可自行百度怎么进入服务管理页面，这里直接用搜索工具进入）</p>
+<p><img src="/20200723120000/image-20230309003131885.png" srcset="/img/loading.gif" lazyload alt="windows启动Jenkins服务"></p>
+<p><img src="/20200723120000/image-20230309003139392.png" srcset="/img/loading.gif" lazyload alt="windows启动Jenkins服务"></p>
+<p>重启后再进入登陆页面就可以正常进入了：</p>
+<p><img src="/20200723120000/image-20230309003155681.png" srcset="/img/loading.gif" lazyload alt="Jenkins首次登录页面"></p>
+<h2 id="登陆"><a href="#登陆" class="headerlink" title="登陆"></a>登陆</h2><p>第一次登陆时需要修改密码，密码在页面上有提示其文件地址（在安装目录下 <code>\secrets\initialAdminPassword</code> 文件中），打开这个文件就能看到初始化密码了。</p>
+<p><img src="/20200723120000/image-20230309003243071.png" srcset="/img/loading.gif" lazyload alt="初始化密码"></p>
+<p>将其复制进页面的输入框即可进入自定义Jenkins页面，这里选择第一个“安装推荐的插件”。</p>
+<p><img src="/20200723120000/image-20230309003304652.png" srcset="/img/loading.gif" lazyload alt="首次插件安装"></p>
+<p><img src="/20200723120000/image-20230309003313434.png" srcset="/img/loading.gif" lazyload alt="首次插件安装"></p>
+<p>若有部分插件安装失败，可以点“重试”，或者点击“继续”以后再安装。</p>
+<p><img src="/20200723120000/image-20230309003337074.png" srcset="/img/loading.gif" lazyload alt="首次插件安装"></p>
+<p>点击继续后就进入了初始化账户的页面：</p>
+<p><img src="/20200723120000/image-20230309003350745.png" srcset="/img/loading.gif" lazyload alt="初始化账户"></p>
+<p>最后一步可能会提示你部分插件重启，那我们就点击重启，也可以手动重启服务。</p>
+<p>重启后的登陆页面就变了：</p>
+<p><img src="/20200723120000/image-20230309003406451.png" srcset="/img/loading.gif" lazyload alt="登录页面"></p>
+<p>输入刚才配置的账户密码即可进入功能页面了：</p>
+<p><img src="/20200723120000/image-20230309003425900.png" srcset="/img/loading.gif" lazyload alt="工作台"></p>
+<h2 id="添加插件（自选）"><a href="#添加插件（自选）" class="headerlink" title="添加插件（自选）"></a>添加插件（自选）</h2><p>管理Jenkins &gt; 插件管理 &gt; 可选插件 &gt; 搜索框</p>
+<p><img src="/20200723120000/image-20230309003444965.png" srcset="/img/loading.gif" lazyload alt="插件安装"></p>
+<p><img src="/20200723120000/image-20230309003449283.png" srcset="/img/loading.gif" lazyload alt="插件安装"></p>
+<p><img src="/20200723120000/image-20230309003453813-1678293294326-1.png" srcset="/img/loading.gif" lazyload alt="插件安装"></p>
+<p><img src="/20200723120000/image-20230309003503103.png" srcset="/img/loading.gif" lazyload alt="插件安装"></p>
+<p>这里我安装了：</p>
+<ul>
+<li>常用插件：Rebuilder、safe restart</li>
+<li>Git相关插件：GitLab、GitLab API  </li>
+<li>SSH相关插件：SSH Agent、SSH</li>
+</ul>
+<h2 id="用户及权限配置"><a href="#用户及权限配置" class="headerlink" title="用户及权限配置"></a>用户及权限配置</h2><h3 id="添加自定义用户"><a href="#添加自定义用户" class="headerlink" title="添加自定义用户"></a>添加自定义用户</h3><p>管理Jenkins &gt; Security &gt; 用户管理 &gt; 新建用户</p>
+<p>新建用户后需要给该用户授权。</p>
+<p>（这里我创建了一个test01用户）</p>
+<h3 id="配置全局安全属性（授权）"><a href="#配置全局安全属性（授权）" class="headerlink" title="配置全局安全属性（授权）"></a>配置全局安全属性（授权）</h3><p>管理Jenkins &gt; Security &gt; Configure Global Security</p>
+<p>在“授权策略”中选择“安全矩阵” &gt; 添加用户&#x2F;组，添加用户后，可以在表格中进行勾选，勾选后点击保存（表格最后面有个全选按钮）。例如：如果不想要给予用户访问系统管理的权限，全勾选后去掉第一项。</p>
+<p><img src="/20200723120000/image-20230309003701457.png" srcset="/img/loading.gif" lazyload alt="配置全局安全属性（授权）"></p>
+<h2 id="将Linux注册到Jenkins上"><a href="#将Linux注册到Jenkins上" class="headerlink" title="将Linux注册到Jenkins上"></a>将Linux注册到Jenkins上</h2><h3 id="新建节点"><a href="#新建节点" class="headerlink" title="新建节点"></a>新建节点</h3><p>进入Jenkins，管理Jenkins &gt; 管理节点 &gt; 新建节点</p>
+<p>输入name</p>
+<p>远程工作目录：&#x2F;root&#x2F;.jenkins</p>
+<p>​    启动方法：launch slave agents via SSH</p>
+<p>​    主机：linux 的ip地址，</p>
+<p>点击 credentials 下的 add 按钮，添加用户名和密码（linux的账户密码），添加完成后通过下拉框选择</p>
+<p>​    保存</p>
+<p><img src="/20200723120000/image-20230309003740927.png" srcset="/img/loading.gif" lazyload alt="管理节点"></p>
+<p><img src="/20200723120000/image-20230309003748084.png" srcset="/img/loading.gif" lazyload alt="新建节点"></p>
+<p>（新版本的启动方式是 launch agents via SSH，需要将 Host Key Verification Strategy 修改为 Non verifying Verification Strategy）</p>
+<h3 id="测试节点"><a href="#测试节点" class="headerlink" title="测试节点"></a>测试节点</h3><p>在jenkins的节点页面，选择上一步新增的节点，点击节点名，进入页面后点击 launch agent 按钮(或者启动代理)即可连接。</p>
+<p><img src="/20200723120000/image-20230309003820212.png" srcset="/img/loading.gif" lazyload alt="测试节点"></p>
+<p><img src="/20200723120000/image-20230309003825982.png" srcset="/img/loading.gif" lazyload alt="测试节点"></p>
+<p>节点配置好了，现在开始新建一个任务吧！</p>
+<h2 id="任务创建与构建"><a href="#任务创建与构建" class="headerlink" title="任务创建与构建"></a>任务创建与构建</h2><ol>
+<li><p>在Jenkins主页，新建一个任务 &gt; 构建一个自由风格的软件项目 &gt; OK。</p>
+</li>
+<li><p>在General标签页，勾选 Restrict where this project can be run，在 Label Expression中输入刚才创建的Linux环境的名称（只允许在指定环境上运行）。</p>
+</li>
+<li><p>在构建标签页，增加构建步骤，excute shell，输入要执行的命令（如 ifconfig）。</p>
+</li>
+<li><p>保存。</p>
+</li>
+<li><p>回到Jenkins主页，点击立即构建。</p>
+</li>
+<li><p>执行完毕后，点击下方的执行记录的任务名（如#1），进入任务详情页，点击 console output ，就可以看到刚才的命令（ifconfig）输出了。</p>
+</li>
+</ol>
+<p><img src="/20200723120000/image-20230309003907541.png" srcset="/img/loading.gif" lazyload alt="任务创建与构建"></p>
+<p><img src="/20200723120000/image-20230309003913189.png" srcset="/img/loading.gif" lazyload alt="任务创建与构建"></p>
+<p><img src="/20200723120000/image-20230309003921720.png" srcset="/img/loading.gif" lazyload alt="任务创建与构建"></p>
+<p><img src="/20200723120000/image-20230309003928911.png" srcset="/img/loading.gif" lazyload alt="任务创建与构建"></p>
+<p><img src="/20200723120000/image-20230309003935299.png" srcset="/img/loading.gif" lazyload alt="任务创建与构建"></p>
+<p><img src="/20200723120000/image-20230309004004086.png" srcset="/img/loading.gif" lazyload alt="任务创建与构建"></p>
+<p><img src="/20200723120000/image-20230309004014886.png" srcset="/img/loading.gif" lazyload alt="任务创建与构建"></p>
+<p><img src="/20200723120000/image-20230309004026782.png" srcset="/img/loading.gif" lazyload alt="任务创建与构建"></p>
+<p><img src="/20200723120000/image-20230309004040680.png" srcset="/img/loading.gif" lazyload alt="任务创建与构建"></p>
+<h2 id="本次分享中的构建脚本示例"><a href="#本次分享中的构建脚本示例" class="headerlink" title="本次分享中的构建脚本示例"></a>本次分享中的构建脚本示例</h2><p><img src="/20200723120000/image-20230309004059676.png" srcset="/img/loading.gif" lazyload alt="构建脚本示例"></p>
+<p>另外，Jenkins也可以实现定时任务自动构建（已演示）。</p>
+<p><img src="/20200723120000/image-20230309004138691.png" srcset="/img/loading.gif" lazyload alt="构建触发器"></p>
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>本次分享中未涉及Jenkins与git持续集成，如果有类似“在提交代码到服务器后能够自动构建“的需求，可网上自行搜索解决方案，这里可以提供一个方案参考：webhook。</p>
 
                 
               </div>
@@ -323,8 +444,6 @@
       
         <a href="/tags/Jenkins/">#Jenkins</a>
       
-        <a href="/tags/Jenkins%E8%84%9A%E6%9C%AC/">#Jenkins脚本</a>
-      
     </div>
   
 </div>
@@ -335,7 +454,7 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Jenkins自动化部署脚本</div>
+      <div>Jenkins使用手册</div>
       <div>https://binbiubiu.github.io/20200723120000/</div>
     </div>
     <div class="license-meta">
@@ -364,9 +483,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/20200727120000/" title="Python基础">
+                      <a href="/20200723130000/" title="Jenkins自动化部署脚本">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Python基础</span>
+                        <span class="hidden-mobile">Jenkins自动化部署脚本</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
