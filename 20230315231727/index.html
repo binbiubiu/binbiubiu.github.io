@@ -1,0 +1,871 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/blogger-logo.png">
+  <link rel="icon" href="/img/blogger-logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Binbiubiu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Zookeeper使用手册 本文主要介绍： 1、zookeeper的概念和基本用法。 2、如何通过Curator这个Java API客户端库访问zookeeper客户端。  1. Zookeeper概念Zookeeper 是 Apache Hadoop 项目下的一个子项目，是一个树形目录服务。 Zookeeper 是一个分布式的、开源的分布式应用程序的协调服务。 Zookeeper 提供的主要功能">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Zookeeper使用手册">
+<meta property="og:url" content="https://binbiubiu.github.io/20230315231727/index.html">
+<meta property="og:site_name" content="Binbiubiu&#39;s blog">
+<meta property="og:description" content="Zookeeper使用手册 本文主要介绍： 1、zookeeper的概念和基本用法。 2、如何通过Curator这个Java API客户端库访问zookeeper客户端。  1. Zookeeper概念Zookeeper 是 Apache Hadoop 项目下的一个子项目，是一个树形目录服务。 Zookeeper 是一个分布式的、开源的分布式应用程序的协调服务。 Zookeeper 提供的主要功能">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://binbiubiu.github.io/20230315231727/image-20230315205619912.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20230315231727/image-20230315205504904.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20230315231727/image-20230315205537772.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20230315231727/image-20230315211100515.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20230315231727/image-20230315210839029.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20230315231727/image-20230315211454971.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20230315231727/image-20230315211616857.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20230315231727/image-20230315214252001.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20230315231727/image-20230315211952986.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20230315231727/image-20230315213718919.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20230315231727/image-20230315213937061.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20230315231727/image-20230315212042192.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20230315231727/image-20230315212333435.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20230315231727/image-20230315212500486.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20230315231727/image-20230315212754997.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20230315231727/image-20230316101144520.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20230315231727/image-20230316103209367.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20230315231727/image-20230316103226236.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20230315231727/image-20230316104427705.png">
+<meta property="og:image" content="https://binbiubiu.github.io/20230315231727/image-20230316130347940.png">
+<meta property="article:published_time" content="2023-03-15T15:17:27.000Z">
+<meta property="article:modified_time" content="2023-03-16T10:11:30.046Z">
+<meta property="article:author" content="Binbiubiu">
+<meta property="article:tag" content="Zookeeper">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://binbiubiu.github.io/20230315231727/image-20230315205619912.png">
+  
+  
+  
+  <title>Zookeeper使用手册 - Binbiubiu&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"binbiubiu.github.io","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>BinBiuBiu&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Zookeeper使用手册"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-03-15 23:17" pubdate>
+          2023年3月15日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          11k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          93 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Zookeeper使用手册</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Zookeeper使用手册"><a href="#Zookeeper使用手册" class="headerlink" title="Zookeeper使用手册"></a>Zookeeper使用手册</h1><blockquote>
+<p>本文主要介绍：</p>
+<p>1、zookeeper的概念和基本用法。</p>
+<p>2、如何通过Curator这个Java API客户端库访问zookeeper客户端。</p>
+</blockquote>
+<h1 id="1-Zookeeper概念"><a href="#1-Zookeeper概念" class="headerlink" title="1. Zookeeper概念"></a>1. Zookeeper概念</h1><p>Zookeeper 是 Apache Hadoop 项目下的一个子项目，是一个树形目录服务。</p>
+<p>Zookeeper 是一个分布式的、开源的分布式应用程序的协调服务。</p>
+<p>Zookeeper 提供的主要功能包括：</p>
+<ul>
+<li><p>配置管理</p>
+</li>
+<li><p>分布式锁</p>
+</li>
+<li><p>集群管理</p>
+</li>
+</ul>
+<p><img src="/20230315231727/image-20230315205619912.png" srcset="/img/loading.gif" lazyload alt="配置中心"></p>
+<p><img src="/20230315231727/image-20230315205504904.png" srcset="/img/loading.gif" lazyload alt="分布式锁"></p>
+<p><img src="/20230315231727/image-20230315205537772.png" srcset="/img/loading.gif" lazyload alt="集群管理（注册中心）"></p>
+<h1 id="2-数据类型"><a href="#2-数据类型" class="headerlink" title="2. 数据类型"></a>2. 数据类型</h1><p>ZooKeeper 是一个树形目录服务,其数据模型和Unix的文件系统目录树很类似，拥有一个层次化结构。</p>
+<p>这里面的每一个节点都被称为： ZNode，每个节点上都会保存自己的数据和节点信息。</p>
+<p>节点可以拥有子节点，同时也允许少量（1MB）数据存储在该节点之下。</p>
+<p>节点可以分为四大类：</p>
+<ul>
+<li><p>PERSISTENT 持久化节点</p>
+</li>
+<li><p>EPHEMERAL 临时节点 ：-e</p>
+</li>
+<li><p>PERSISTENT_SEQUENTIAL 持久化顺序节点 ：-s</p>
+</li>
+<li><p>EPHEMERAL_SEQUENTIAL 临时顺序节点 ：-es</p>
+</li>
+</ul>
+<h2 id="Zookeeper数据模型"><a href="#Zookeeper数据模型" class="headerlink" title="Zookeeper数据模型"></a>Zookeeper数据模型</h2><p><img src="/20230315231727/image-20230315211100515.png" srcset="/img/loading.gif" lazyload alt="zookeeper数据模型"></p>
+<h1 id="3-安装zookeeper"><a href="#3-安装zookeeper" class="headerlink" title="3. 安装zookeeper"></a>3. 安装zookeeper</h1><p>zookeeper的安装请参考文章<em><strong>《Zookeeper安装》</strong></em>。</p>
+<h1 id="4-服务端命令"><a href="#4-服务端命令" class="headerlink" title="4. 服务端命令"></a>4. 服务端命令</h1><ul>
+<li><p>启动 ZooKeeper 服务：<code>./zkServer.sh start</code></p>
+</li>
+<li><p>查看 ZooKeeper 服务状态：<code>./zkServer.sh status</code></p>
+</li>
+<li><p>停止 ZooKeeper 服务：<code>./zkServer.sh stop</code></p>
+</li>
+<li><p>重启 ZooKeeper 服务：<code>./zkServer.sh restart</code></p>
+</li>
+</ul>
+<h1 id="5-客户端命令"><a href="#5-客户端命令" class="headerlink" title="5. 客户端命令"></a>5. 客户端命令</h1><h2 id="5-1-启动客户端"><a href="#5-1-启动客户端" class="headerlink" title="5.1. 启动客户端"></a>5.1. 启动客户端</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 进入zookeeper目录</span><br><span class="hljs-built_in">cd</span> /usr/zookeeper/apache-zookeeper-3.5.6-bin/bin<br><span class="hljs-comment"># 启动客户端，并连接到zookeeper服务端，./zkCli.sh –server ip:port 如：</span><br>./zkCli.sh -server localhost:2181<br></code></pre></td></tr></table></figure>
+
+<p><img src="/20230315231727/image-20230315210839029.png" srcset="/img/loading.gif" lazyload alt="客户端连接成功"></p>
+<p>可以在客户端命令行通过使用 <code>quit</code> 命令退出，断开连接。</p>
+<h2 id="5-2-查看命令帮助"><a href="#5-2-查看命令帮助" class="headerlink" title="5.2. 查看命令帮助"></a>5.2. 查看命令帮助</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 查看命令帮助</span><br><span class="hljs-built_in">help</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="5-3-展示节点信息"><a href="#5-3-展示节点信息" class="headerlink" title="5.3. 展示节点信息"></a>5.3. 展示节点信息</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 显示指定目录下节点</span><br><span class="hljs-built_in">ls</span> /path<br></code></pre></td></tr></table></figure>
+
+<p><img src="/20230315231727/image-20230315211454971.png" srcset="/img/loading.gif" lazyload alt="查看根目录下的节点"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 显示指定节点信息以及子节点</span><br><span class="hljs-built_in">ls</span> -s /path<br></code></pre></td></tr></table></figure>
+
+<p><img src="/20230315231727/image-20230315211616857.png" srcset="/img/loading.gif" lazyload alt="查看指定目录下的节点信息"></p>
+<p><img src="/20230315231727/image-20230315214252001.png" srcset="/img/loading.gif" lazyload alt="查看节点详细信息"></p>
+<h3 id="节点信息说明"><a href="#节点信息说明" class="headerlink" title="节点信息说明"></a>节点信息说明</h3><p><strong>czxid</strong>：节点被创建的事务ID</p>
+<p><strong>ctime</strong>：创建时间 </p>
+<p><strong>mzxid</strong>：最后一次被更新的事务ID </p>
+<p><strong>mtime</strong>：修改时间 </p>
+<p><strong>pzxid</strong>：子节点列表最后一次被更新的事务ID</p>
+<p><strong>cversion</strong>：子节点的版本号</p>
+<p><strong>dataversion</strong>：数据版本号</p>
+<p><strong>aclversion</strong>：权限版本号</p>
+<p><strong>ephemeralOwner</strong>：用于临时节点，代表临时节点的事务ID，如果为持久节点则为0</p>
+<p><strong>dataLength</strong>：节点存储的数据的长度</p>
+<p><strong>numChildren</strong>：当前节点的子节点个数 </p>
+<h2 id="5-4-节点操作（CURD）"><a href="#5-4-节点操作（CURD）" class="headerlink" title="5.4. 节点操作（CURD）"></a>5.4. 节点操作（CURD）</h2><h3 id="创建节点"><a href="#创建节点" class="headerlink" title="创建节点"></a>创建节点</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 创建节点并赋值value</span><br>create /节点path value<br></code></pre></td></tr></table></figure>
+
+<p><img src="/20230315231727/image-20230315211952986.png" srcset="/img/loading.gif" lazyload alt="创建节点与赋值"></p>
+<h4 id="创建临时节点"><a href="#创建临时节点" class="headerlink" title="创建临时节点"></a>创建临时节点</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 创建临时节点并赋值value</span><br>create -e /节点path value<br></code></pre></td></tr></table></figure>
+
+<p>临时节点在会话关闭（quit断开连接）之后就会被删除。</p>
+<h4 id="创建顺序节点"><a href="#创建顺序节点" class="headerlink" title="创建顺序节点"></a>创建顺序节点</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 创建顺序节点并赋值value</span><br>create -s /节点path value<br></code></pre></td></tr></table></figure>
+
+<p><img src="/20230315231727/image-20230315213718919.png" srcset="/img/loading.gif" lazyload alt="创建顺序节点"></p>
+<p>顺序节点的编号是所有节点都共用一个编号器（不断累加）。</p>
+<h4 id="创建临时顺序节点"><a href="#创建临时顺序节点" class="headerlink" title="创建临时顺序节点"></a>创建临时顺序节点</h4><p><img src="/20230315231727/image-20230315213937061.png" srcset="/img/loading.gif" lazyload alt="image-20230315213937061"></p>
+<h3 id="获取节点值"><a href="#获取节点值" class="headerlink" title="获取节点值"></a>获取节点值</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 获取节点值</span><br>get /节点path<br></code></pre></td></tr></table></figure>
+
+<p><img src="/20230315231727/image-20230315212042192.png" srcset="/img/loading.gif" lazyload alt="获取节点数据"></p>
+<h3 id="设置节点值"><a href="#设置节点值" class="headerlink" title="设置节点值"></a>设置节点值</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 设置节点值</span><br><span class="hljs-built_in">set</span> /节点path value<br></code></pre></td></tr></table></figure>
+
+<p><img src="/20230315231727/image-20230315212333435.png" srcset="/img/loading.gif" lazyload alt="设置节点值"></p>
+<h3 id="删除单个节点"><a href="#删除单个节点" class="headerlink" title="删除单个节点"></a>删除单个节点</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 删除单个节点</span><br>delete /节点path<br></code></pre></td></tr></table></figure>
+
+<p><img src="/20230315231727/image-20230315212500486.png" srcset="/img/loading.gif" lazyload alt="删除单个节点"></p>
+<h3 id="删除带有子节点的节点"><a href="#删除带有子节点的节点" class="headerlink" title="删除带有子节点的节点"></a>删除带有子节点的节点</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 删除带有子节点的节点</span><br>deleteall /节点path<br></code></pre></td></tr></table></figure>
+
+<p><img src="/20230315231727/image-20230315212754997.png" srcset="/img/loading.gif" lazyload alt="不能用delete命令删除非空节点"></p>
+<h1 id="6-Curator-客户端库"><a href="#6-Curator-客户端库" class="headerlink" title="6. Curator 客户端库"></a>6. Curator 客户端库</h1><h2 id="6-1-Curator-介绍"><a href="#6-1-Curator-介绍" class="headerlink" title="6.1. Curator 介绍"></a>6.1. Curator 介绍</h2><p>Curator 是 Apache ZooKeeper 的Java客户端库。</p>
+<p>Curator 项目的目标是简化Java中 ZooKeeper 客户端的使用。</p>
+<p>👉<a target="_blank" rel="noopener" href="http://curator.apache.org/">官网地址</a>。使用Curator需要注意和ZooKeeper的版本兼容问题。</p>
+<h2 id="6-2-Curator-API-常用操作"><a href="#6-2-Curator-API-常用操作" class="headerlink" title="6.2. Curator API 常用操作"></a>6.2. Curator API 常用操作</h2><ul>
+<li><p>建立连接、添加节点、删除节点、修改节点、查询节点</p>
+</li>
+<li><p>Watch事件监听</p>
+</li>
+<li><p>分布式锁实现</p>
+</li>
+</ul>
+<h3 id="6-2-1-Java中连接zk-server"><a href="#6-2-1-Java中连接zk-server" class="headerlink" title="6.2.1 Java中连接zk server"></a>6.2.1 Java中连接zk server</h3><p>新建一个maven项目，pom.xml文件添加依赖：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span>?&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">project</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://maven.apache.org/POM/4.0.0&quot;</span></span><br><span class="hljs-tag">         <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span><br><span class="hljs-tag">         <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">modelVersion</span>&gt;</span>4.0.0<span class="hljs-tag">&lt;/<span class="hljs-name">modelVersion</span>&gt;</span><br><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.learning<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>curator-zk<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.0-SNAPSHOT<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><br>    <span class="hljs-tag">&lt;<span class="hljs-name">properties</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">maven.compiler.source</span>&gt;</span>8<span class="hljs-tag">&lt;/<span class="hljs-name">maven.compiler.source</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">maven.compiler.target</span>&gt;</span>8<span class="hljs-tag">&lt;/<span class="hljs-name">maven.compiler.target</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">properties</span>&gt;</span><br><br>    <span class="hljs-tag">&lt;<span class="hljs-name">dependencies</span>&gt;</span><br>        <span class="hljs-comment">&lt;!--junit--&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>junit<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>junit<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>4.13.2<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">scope</span>&gt;</span>test<span class="hljs-tag">&lt;/<span class="hljs-name">scope</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br>        <br>        <span class="hljs-comment">&lt;!--Curator--&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.curator<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>curator-framework<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>4.0.0<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.curator<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>curator-recipes<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>4.0.0<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br><br>        <span class="hljs-comment">&lt;!--日志--&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.slf4j<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>slf4j-api<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.7.21<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.slf4j<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>slf4j-log4j12<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.7.21<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">dependencies</span>&gt;</span><br>    <br>    <span class="hljs-tag">&lt;<span class="hljs-name">build</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">plugins</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">plugin</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>maven-compiler-plugin<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>3.1<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">configuration</span>&gt;</span><br>                    <span class="hljs-tag">&lt;<span class="hljs-name">source</span>&gt;</span>1.8<span class="hljs-tag">&lt;/<span class="hljs-name">source</span>&gt;</span><br>                    <span class="hljs-tag">&lt;<span class="hljs-name">target</span>&gt;</span>1.8<span class="hljs-tag">&lt;/<span class="hljs-name">target</span>&gt;</span><br>                <span class="hljs-tag">&lt;/<span class="hljs-name">configuration</span>&gt;</span><br>            <span class="hljs-tag">&lt;/<span class="hljs-name">plugin</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">plugins</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">build</span>&gt;</span><br><br><span class="hljs-tag">&lt;/<span class="hljs-name">project</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>修改 <code>src/main/resources/log4j.properties</code> 文件：</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-comment"># 日志级别</span><br><span class="hljs-attr">log4j.rootLogger</span>=<span class="hljs-string">ERROR,stdout</span><br><br><span class="hljs-attr">log4j.appender.stdout</span> = <span class="hljs-string">org.apache.log4j.ConsoleAppender</span><br><span class="hljs-attr">log4j.appender.stdout.Target</span> = <span class="hljs-string">System.out</span><br><span class="hljs-attr">log4j.appender.stdout.layout</span> = <span class="hljs-string">org.apache.log4j.PatternLayout</span><br><span class="hljs-attr">log4j.appender.stdout.layout.ConversionPattern</span> = <span class="hljs-string">[%d&#123;yyyy-MM-dd HH/:mm/:ss&#125;]%-5p %c(line/:%L) %x-%m%n</span><br></code></pre></td></tr></table></figure>
+
+<p>新建一个单元测试类，测试连接zk server：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 连接zk server</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@Test</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testConnect</span><span class="hljs-params">()</span> &#123;<br>    <span class="hljs-comment">/*</span><br><span class="hljs-comment">     * 参数说明</span><br><span class="hljs-comment">     * @param connectString       zk的server的地址和端口（多个用,隔开）</span><br><span class="hljs-comment">     * @param sessionTimeoutMs    会话超时时间（ms）</span><br><span class="hljs-comment">     * @param connectionTimeoutMs 连接超时时间（ms）</span><br><span class="hljs-comment">     * @param retryPolicy         重试策略</span><br><span class="hljs-comment">     * @return client</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-type">CuratorFramework</span> <span class="hljs-variable">client</span> <span class="hljs-operator">=</span> CuratorFrameworkFactory.newClient(<span class="hljs-string">&quot;192.168.18.123:2181&quot;</span>, <span class="hljs-number">60</span> * <span class="hljs-number">1000</span>, <span class="hljs-number">15</span> * <span class="hljs-number">1000</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">ExponentialBackoffRetry</span>(<span class="hljs-number">3000</span>, <span class="hljs-number">10</span>));<br>    client.start();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="6-2-2-zookeeper的CURD"><a href="#6-2-2-zookeeper的CURD" class="headerlink" title="6.2.2 zookeeper的CURD"></a>6.2.2 zookeeper的CURD</h3><p>完整测试代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.learning;<br><br><span class="hljs-keyword">import</span> org.apache.curator.framework.CuratorFramework;<br><span class="hljs-keyword">import</span> org.apache.curator.framework.CuratorFrameworkFactory;<br><span class="hljs-keyword">import</span> org.apache.curator.retry.ExponentialBackoffRetry;<br><span class="hljs-keyword">import</span> org.apache.zookeeper.CreateMode;<br><span class="hljs-keyword">import</span> org.apache.zookeeper.data.Stat;<br><span class="hljs-keyword">import</span> org.junit.After;<br><span class="hljs-keyword">import</span> org.junit.Before;<br><span class="hljs-keyword">import</span> org.junit.Test;<br><br><span class="hljs-keyword">import</span> java.nio.charset.StandardCharsets;<br><span class="hljs-keyword">import</span> java.util.List;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CuratorTest</span> &#123;<br><br>    <span class="hljs-keyword">private</span> CuratorFramework client;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 连接zk server（链式）</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Before</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">connect</span><span class="hljs-params">()</span> &#123;<br>        client = CuratorFrameworkFactory.builder()<br>                .connectString(<span class="hljs-string">&quot;192.168.18.123:2181&quot;</span>)<br>                .sessionTimeoutMs(<span class="hljs-number">60</span> * <span class="hljs-number">1000</span>)<br>                .connectionTimeoutMs(<span class="hljs-number">15</span> * <span class="hljs-number">1000</span>)<br>                .retryPolicy(<span class="hljs-keyword">new</span> <span class="hljs-title class_">ExponentialBackoffRetry</span>(<span class="hljs-number">3000</span>, <span class="hljs-number">10</span>))<br><span class="hljs-comment">//                .namespace(&quot;app1&quot;) //指定默认的起始节点，就不用每次都去写根节点</span><br>                .build();<br>        client.start();<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 释放资源</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@After</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">close</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-keyword">if</span> (client != <span class="hljs-literal">null</span>)&#123;<br>            client.close();<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 创建节点 测试</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@throws</span> Exception</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Test</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testCreate</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>        <span class="hljs-comment">// 注意，这边如果一直转圈圈无法创建，请检查是否已经关闭linux防火墙或者是否开放端口</span><br><br>        <span class="hljs-comment">// 创建默认节点，如果数据为空，那么默认数据是当前客户端的ip地址</span><br>        <span class="hljs-type">String</span> <span class="hljs-variable">path</span> <span class="hljs-operator">=</span> client.create().forPath(<span class="hljs-string">&quot;/app5&quot;</span>);<br>        System.out.println(path);<br><br>        <span class="hljs-comment">// 创建带数据的节点</span><br>        path = client.create().forPath(<span class="hljs-string">&quot;/app6&quot;</span>, <span class="hljs-string">&quot;数据&quot;</span>.getBytes(StandardCharsets.UTF_8));<br>        System.out.println(path);<br><br>        <span class="hljs-comment">// 创建临时节点</span><br>        path = client.create().withMode(CreateMode.EPHEMERAL).forPath(<span class="hljs-string">&quot;/tmpNode&quot;</span>);<br>        System.out.println(path);<br><br>        <span class="hljs-comment">// 创建多级节点，如果父节点不存在则创建父节点</span><br>        path = client.create().creatingParentsIfNeeded().forPath(<span class="hljs-string">&quot;/parent/childNode&quot;</span>);<br>        System.out.println(path);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 查询节点 测试</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@throws</span> Exception</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Test</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testGet</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>        <span class="hljs-comment">// 节点数据：get</span><br>        <span class="hljs-type">byte</span>[] bytes = client.getData().forPath(<span class="hljs-string">&quot;/app6&quot;</span>);<br>        System.out.println(<span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(bytes));<br><br>        <span class="hljs-comment">// 获取子节点：ls</span><br>        List&lt;String&gt; list = client.getChildren().forPath(<span class="hljs-string">&quot;/&quot;</span>);<br>        list.forEach(child -&gt; System.out.println(child));<br><br>        <span class="hljs-comment">// 获取状态信息：ls -s</span><br>        <span class="hljs-type">Stat</span> <span class="hljs-variable">stat</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Stat</span>();<br>        client.getData().storingStatIn(stat).forPath(<span class="hljs-string">&quot;/app6&quot;</span>);<br>        <span class="hljs-comment">// 状态信息会封装进 Stat 对象</span><br>        System.out.println(stat);<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 修改节点数据 测试</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@throws</span> Exception</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Test</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testSet</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>        <span class="hljs-comment">// 修改节点数据。</span><br>        client.setData().forPath(<span class="hljs-string">&quot;/app6&quot;</span>, <span class="hljs-string">&quot;dataValue&quot;</span>.getBytes(StandardCharsets.UTF_8));<br><br>        <span class="hljs-comment">// 通过版本号修改数据，CAS原理</span><br>        <span class="hljs-comment">// 先查询版本号信息</span><br>        <span class="hljs-type">Stat</span> <span class="hljs-variable">stat</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Stat</span>();<br>        client.getData().storingStatIn(stat).forPath(<span class="hljs-string">&quot;/app6&quot;</span>);<br>        <span class="hljs-comment">// 如果修改失败直接返回异常</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">version</span> <span class="hljs-operator">=</span> stat.getVersion();<br>        client.setData().withVersion(version).forPath(<span class="hljs-string">&quot;/app6&quot;</span>, <span class="hljs-string">&quot;dataValue&quot;</span>.getBytes(StandardCharsets.UTF_8));<br>    &#125;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 删除节点数据 测试</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@throws</span> Exception</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Test</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testDelete</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>        <span class="hljs-comment">// 删除单个节点</span><br>        client.delete().forPath(<span class="hljs-string">&quot;/app6&quot;</span>);<br><br>        <span class="hljs-comment">// 删除含子节点的节点</span><br>        client.delete().deletingChildrenIfNeeded().forPath(<span class="hljs-string">&quot;/app6&quot;</span>);<br><br>        <span class="hljs-comment">// 必须成功的删除</span><br>        client.delete().guaranteed().forPath(<span class="hljs-string">&quot;/app6&quot;</span>);<br><br>        <span class="hljs-comment">// 带回调函数的删除</span><br>        client.delete().inBackground((client, event) -&gt; &#123;<br>            System.out.println(<span class="hljs-string">&quot;删除后回调函数被执行...&quot;</span>);<br>        &#125;).forPath(<span class="hljs-string">&quot;/app6&quot;</span>);<br>    &#125;<br><br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="6-2-3-Watch监控"><a href="#6-2-3-Watch监控" class="headerlink" title="6.2.3 Watch监控"></a>6.2.3 Watch监控</h3><p>ZooKeeper 允许用户在指定节点上注册一些Watcher，并且在一些特定事件触发的时候，ZooKeeper 服务端会将事件通知到感兴趣的客户端上去，该机制是 ZooKeeper 实现分布式协调服务的重要特性。</p>
+<p>ZooKeeper 中引入了Watcher机制来实现了发布&#x2F;订阅功能能，能够让多个订阅者同时监听某一个对象，当一个对象自身状态变化时，会通知所有订阅者。</p>
+<p>ZooKeeper提供了三种Watcher：</p>
+<ul>
+<li><p><strong>NodeCache</strong>：只是监控某一个特定的节点。</p>
+</li>
+<li><p><strong>PathChildrenCache</strong>：监控一个ZNode的子节点（不包含自己）。</p>
+</li>
+<li><p><strong>TreeCache</strong>：可以监控整个树上的所有节点，类似于<strong>PathChildrenCache</strong>和<strong>NodeCache</strong>的组合。</p>
+</li>
+</ul>
+<p>新建一个单元测试类，使用<a href="#zookeeper%E7%9A%84CURD">上一步</a>中的连接方式进行单元测试。</p>
+<h4 id="监控某一个特定的节点"><a href="#监控某一个特定的节点" class="headerlink" title="监控某一个特定的节点"></a>监控某一个特定的节点</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 监控某一个特定的节点</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@Test</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testNodeCache</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>    <span class="hljs-type">NodeCache</span> <span class="hljs-variable">nodeCache</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">NodeCache</span>(client, <span class="hljs-string">&quot;/app1&quot;</span>);<br>    <span class="hljs-comment">// 注册监听器</span><br>    nodeCache.getListenable().addListener(<span class="hljs-keyword">new</span> <span class="hljs-title class_">NodeCacheListener</span>() &#123;<br>        <span class="hljs-meta">@Override</span><br>        <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">nodeChanged</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>            System.out.println(<span class="hljs-string">&quot;节点发生变化...&quot;</span>);<br>            <span class="hljs-type">byte</span>[] data = nodeCache.getCurrentData().getData();<br>            System.out.println(<span class="hljs-string">&quot;节点新的值：&quot;</span> + <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(data));<br>        &#125;<br>    &#125;);<br>    <span class="hljs-comment">// 开始监听</span><br>    nodeCache.start(<span class="hljs-literal">true</span>);<br><br>    <span class="hljs-comment">// 单元测试，让程序一直运行，测试监听</span><br>    <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>)&#123;<br><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="监控一个ZNode的子节点（不包含自己）"><a href="#监控一个ZNode的子节点（不包含自己）" class="headerlink" title="监控一个ZNode的子节点（不包含自己）"></a>监控一个ZNode的子节点（不包含自己）</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 监控一个ZNode的子节点（不包含自己）</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@Test</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testPathChildrenCache</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>    <span class="hljs-type">PathChildrenCache</span> <span class="hljs-variable">pathChildrenCache</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">PathChildrenCache</span>(client, <span class="hljs-string">&quot;/app2&quot;</span>, <span class="hljs-literal">true</span>);<br>    <span class="hljs-comment">// 注册监听器</span><br>    pathChildrenCache.getListenable().addListener(<span class="hljs-keyword">new</span> <span class="hljs-title class_">PathChildrenCacheListener</span>() &#123;<br>        <span class="hljs-meta">@Override</span><br>        <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">childEvent</span><span class="hljs-params">(CuratorFramework curatorFramework, PathChildrenCacheEvent pathChildrenCacheEvent)</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>            System.out.println(<span class="hljs-string">&quot;子节点发生变化...&quot;</span>);<br>            System.out.println(pathChildrenCacheEvent);<br>        &#125;<br>    &#125;);<br>    <span class="hljs-comment">// 开始监听</span><br>    pathChildrenCache.start();<br>    <span class="hljs-comment">// 单元测试，让程序一直运行，测试监听</span><br>    <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>)&#123;<br><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><img src="/20230315231727/image-20230316101144520.png" srcset="/img/loading.gif" lazyload alt="子节点变化类型"></p>
+<h4 id="监控整个树上的所有节点"><a href="#监控整个树上的所有节点" class="headerlink" title="监控整个树上的所有节点"></a>监控整个树上的所有节点</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 可以监控整个树上的所有节点</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@Test</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">testTreeCache</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>    <span class="hljs-type">TreeCache</span> <span class="hljs-variable">treeCache</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeCache</span>(client, <span class="hljs-string">&quot;/app2&quot;</span>);<br>    <span class="hljs-comment">// 注册监听器</span><br>    treeCache.getListenable().addListener(<span class="hljs-keyword">new</span> <span class="hljs-title class_">TreeCacheListener</span>() &#123;<br>        <span class="hljs-meta">@Override</span><br>        <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">childEvent</span><span class="hljs-params">(CuratorFramework curatorFramework, TreeCacheEvent treeCacheEvent)</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>            System.out.println(<span class="hljs-string">&quot;节点发生变化...&quot;</span>);<br>            System.out.println(treeCacheEvent);<br>        &#125;<br>    &#125;);<br>    <span class="hljs-comment">// 开始监听</span><br>    treeCache.start();<br>    <span class="hljs-comment">// 单元测试，让程序一直运行，测试监听</span><br>    <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>)&#123;<br><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="6-2-4-分布式锁"><a href="#6-2-4-分布式锁" class="headerlink" title="6.2.4 分布式锁"></a>6.2.4 分布式锁</h3><h4 id="分布式锁概念"><a href="#分布式锁概念" class="headerlink" title="分布式锁概念"></a>分布式锁概念</h4><p>在我们进行单机应用开发，涉及并发同步的时候，我们往往采用synchronized或者Lock的方式来解决多线程间的代码同步问题，这时多线程的运行都是在同一个JVM之下，没有任何问题。</p>
+<p>但当我们的应用是分布式集群工作的情况下，属于多JVM下的工作环境，跨JVM之间已经无法通过多线程的锁解决同步问题。</p>
+<p>那么就需要一种更加高级的锁机制，来处理种跨机器的进程之间的数据同步问题——这就是分布式锁。</p>
+<p><img src="/20230315231727/image-20230316103209367.png" srcset="/img/loading.gif" lazyload alt="分布式锁"></p>
+<h4 id="分布式锁的几种实现方案"><a href="#分布式锁的几种实现方案" class="headerlink" title="分布式锁的几种实现方案"></a>分布式锁的几种实现方案</h4><ul>
+<li>基于缓存实现：Redis、Memcache。</li>
+<li>基于zookeeper实现。</li>
+<li>基于数据库层面实现（通过表数据判断是否获得锁）。</li>
+</ul>
+<p><img src="/20230315231727/image-20230316103226236.png" srcset="/img/loading.gif" lazyload alt="分布式锁的几种实现方案"></p>
+<h4 id="zookeeper分布式锁原理"><a href="#zookeeper分布式锁原理" class="headerlink" title="zookeeper分布式锁原理"></a>zookeeper分布式锁原理</h4><p>核心思想：当客户端要获取锁，则创建节点，使用完锁，则删除该节点。</p>
+<ol>
+<li><p>客户端获取锁时，在lock节点下创建<em><strong>临时顺序</strong></em>节点。</p>
+<p><strong>临时</strong> 是为了能够有效的删除节点，避免锁无法释放的问题。</p>
+<p><strong>顺序</strong> 是为了客户端能够判断自己是否获取到了锁。</p>
+</li>
+<li><p>然后获取lock下面的所有子节点，客户端获取到所有的子节点之后，如果发现自己创建的子节点序号最小，那么就认为该客户端获取到了锁。使用完锁后，将该节点删除。</p>
+</li>
+<li><p>如果发现自己创建的节点并非lock所有子节点中最小的，说明自己还没有获取到锁，此时客户端需要找到比自己小的那个节点，同时对其注册事件监听器，监听删除事件。</p>
+</li>
+<li><p>如果发现比自己小的那个节点被删除，则客户端的Watcher会收到相应通知，此时再次判断自己创建的节点是否是lock子节点中序号最小的，如果是则获取到了锁，如果不是则重复以上步骤继续获取到比自己小的一个节点，并注册监听。</p>
+</li>
+</ol>
+<p><img src="/20230315231727/image-20230316104427705.png" srcset="/img/loading.gif" lazyload alt="zookeeper分布式锁原理"></p>
+<h4 id="Curator中的五种锁方案"><a href="#Curator中的五种锁方案" class="headerlink" title="Curator中的五种锁方案"></a>Curator中的五种锁方案</h4><ul>
+<li><p>InterProcessSemaphoreMutex：分布式排它锁（非可重入锁）</p>
+</li>
+<li><p>InterProcessMutex：分布式可重入排它锁</p>
+</li>
+<li><p>InterProcessReadWriteLock：分布式读写锁</p>
+</li>
+<li><p>InterProcessMultiLock：将多个锁作为单个实体管理的容器</p>
+</li>
+<li><p>InterProcessSemaphoreV2：共享信号量</p>
+</li>
+</ul>
+<h1 id="7-zookeeper集群"><a href="#7-zookeeper集群" class="headerlink" title="7. zookeeper集群"></a>7. zookeeper集群</h1><h2 id="7-1-Zookeeper-集群介绍"><a href="#7-1-Zookeeper-集群介绍" class="headerlink" title="7.1 Zookeeper 集群介绍"></a>7.1 Zookeeper 集群介绍</h2><h3 id="Zookeeper集群架构图"><a href="#Zookeeper集群架构图" class="headerlink" title="Zookeeper集群架构图"></a>Zookeeper集群架构图</h3><p><img src="/20230315231727/image-20230316130347940.png" srcset="/img/loading.gif" lazyload alt="Zookeeper集群"></p>
+<h3 id="Zookeeper集群角色"><a href="#Zookeeper集群角色" class="headerlink" title="Zookeeper集群角色"></a>Zookeeper集群角色</h3><p>在ZooKeeper集群服中务中有三个角色：</p>
+<ul>
+<li><p><strong>Leader</strong> 领导者</p>
+<ol>
+<li>处理事务请求</li>
+<li>集群内部各服务器的调度者</li>
+</ol>
+</li>
+<li><p><strong>Follower</strong> 跟随者</p>
+<ol>
+<li>处理客户端非事务请求，转发事务请求给Leader服务器</li>
+<li>参与Leader选举投票</li>
+</ol>
+</li>
+<li><p><strong>Observer</strong> 观察者</p>
+<ol>
+<li>处理客户端非事务请求，转发事务请求给Leader服务器</li>
+</ol>
+</li>
+</ul>
+<h3 id="Leader选举机制"><a href="#Leader选举机制" class="headerlink" title="Leader选举机制"></a>Leader选举机制</h3><p>前提：可运行的机器要超过集群总数量的半数。</p>
+<ul>
+<li><p>Serverid：服务器ID</p>
+<p>比如有三台服务器，编号分别是1、2、3。编号越大在选择算法中的权重越大。</p>
+</li>
+<li><p>Zxid：数据ID</p>
+<p>服务器中存放的最大数据ID。值越大说明数据越新，在选举算法中数据越新权重越大。</p>
+</li>
+<li><p>在Leader选举的过程中，如果某台ZooKeeper获得了超过半数的选票，则此ZooKeeper就可以成为Leader了。</p>
+</li>
+</ul>
+<p>如果有这么一种情况，顺序启动zk-server：</p>
+<p>1）1号zk-server启动，此时还是非集群状态；</p>
+<p>2）接着2号zk-server启动，此时选举2号为leader；</p>
+<p>3）如果接着3号zk-server启动，此时还是2号为leader，不会重新进行选举，只有在2号发生故障的情况下才会重新选举，此时3号机就会当选leader。</p>
+<h2 id="7-2-Zookeeper-集群搭建"><a href="#7-2-Zookeeper-集群搭建" class="headerlink" title="7.2 Zookeeper 集群搭建"></a>7.2 Zookeeper 集群搭建</h2><p>参考文章<em><strong>《Zookeeper集群搭建》</strong></em>。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/" class="category-chain-item">技术分享</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/Zookeeper/" class="category-chain-item">Zookeeper</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Zookeeper/">#Zookeeper</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Zookeeper使用手册</div>
+      <div>https://binbiubiu.github.io/20230315231727/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Binbiubiu</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年3月15日</div>
+        </div>
+      
+      
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/20230316124100/" title="Zookeeper集群搭建">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Zookeeper集群搭建</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/20230315144300/" title="CentOS安装Java">
+                        <span class="hidden-mobile">CentOS安装Java</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <i class="iconfont icon-love"></i> 技术支持： <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> |  <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
